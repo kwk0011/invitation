@@ -254,7 +254,13 @@ p { margin: 0; }
 }
 .fact:last-child { border-bottom: 0; }
 .fact dt { color: var(--ink-faint); font-size: var(--step--1); letter-spacing: .06em; }
-.fact dd { margin: 0; font-variant-numeric: tabular-nums; }
+.fact dd {
+  margin: 0;
+  font-family: var(--font-display);   /* 인사말·이름과 같은 명조로 통일 */
+  font-size: var(--step-1);
+  line-height: 1.7;
+  font-variant-numeric: tabular-nums;
+}
 
 /* ── 갤러리 ── */
 .gallery {
