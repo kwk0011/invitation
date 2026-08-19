@@ -1,0 +1,5 @@
+# 미리보기 전용 사본 (배포에는 index.html만 필요)
+artifact.html
+
+# Claude Code 로컬 설정
+.claude/
