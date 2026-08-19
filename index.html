@@ -10,7 +10,7 @@
 <meta property="og:title" content="루나의 첫 번째 생일에 초대합니다" />
 <meta property="og:description" content="2026년 9월 24일 목요일 오후 5시 30분 · 씨마크 호텔 1층 더 레스토랑" />
 <meta property="og:type" content="website" />
-<meta name="color-scheme" content="light" />
+<meta name="color-scheme" content="light dark" />
 <meta name="theme-color" content="#FCF8F1" />
 <style>
 /* ─────────────────────────────────────────────
@@ -18,8 +18,7 @@
    색동 띠 5색(파스텔): 쪽빛 / 옥색 / 치자 / 장미 / 안개
    ───────────────────────────────────────────── */
 :root {
-  /* 브라우저의 "강제 다크모드"에서 빠져나오기 — 항상 밝게 */
-  color-scheme: only light;
+  color-scheme: light dark;
 
   /* 따뜻한 아이보리 */
   --paper:      #EFE7D9;   /* 넓은 화면에서 종이 바깥 여백 */
@@ -49,6 +48,47 @@
   --measure: 27rem;
 }
 
+/* 다크 테마 — 시스템 설정을 따르되, 아래 토글로 직접 바꾸면 그게 우선 */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+  --paper:      #171310;
+  --surface:    #1F1A16;
+  --surface-2:  #2A241E;
+  --ink:        #F0E8DC;
+  --ink-soft:   #B5A895;
+  --ink-faint:  #8E8272;
+  --line:       #362E26;
+  --seal:       #E4778A;
+  --seal-ink:   #2A1015;
+  --indigo:     #7C9BC6;
+  --jade:       #8FC7B6;
+  --gardenia:   #E3BA6C;
+  --band-rose:  #C9707F;
+  --band-mist:  #4A4238;
+  --shadow:     0 1px 2px rgba(0,0,0,.4), 0 8px 24px -14px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper:      #171310;
+  --surface:    #1F1A16;
+  --surface-2:  #2A241E;
+  --ink:        #F0E8DC;
+  --ink-soft:   #B5A895;
+  --ink-faint:  #8E8272;
+  --line:       #362E26;
+  --seal:       #E4778A;
+  --seal-ink:   #2A1015;
+  --indigo:     #7C9BC6;
+  --jade:       #8FC7B6;
+  --gardenia:   #E3BA6C;
+  --band-rose:  #C9707F;
+  --band-mist:  #4A4238;
+  --shadow:     0 1px 2px rgba(0,0,0,.4), 0 8px 24px -14px rgba(0,0,0,.7);
+}
+:root[data-theme="light"] { color-scheme: light; }
+
 * { box-sizing: border-box; }
 /* .btns 등 display 지정이 [hidden]을 덮지 않도록 */
 [hidden] { display: none !important; }
@@ -75,6 +115,28 @@ body::before {
 img { max-width: 100%; display: block; }
 a { color: inherit; }
 :focus-visible { outline: 2px solid var(--seal); outline-offset: 3px; border-radius: 4px; }
+
+/* ── 테마 토글 ── */
+.theme-toggle {
+  position: fixed; top: 12px; right: 12px; z-index: 40;
+  width: 38px; height: 38px; padding: 0;
+  display: grid; place-content: center;
+  cursor: pointer;
+  border: 1px solid var(--line); border-radius: 50%;
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  color: var(--ink-soft);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  transition: color .2s, border-color .2s;
+}
+.theme-toggle:hover { color: var(--ink); border-color: var(--ink-faint); }
+.theme-toggle svg { width: 17px; height: 17px; display: block; }
+.theme-toggle .icon-moon { display: none; }
+:root[data-theme="dark"] .theme-toggle .icon-moon { display: block; }
+:root[data-theme="dark"] .theme-toggle .icon-sun { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .icon-moon { display: block; }
+  :root:not([data-theme="light"]) .theme-toggle .icon-sun { display: none; }
+}
 
 /* ── 뼈대 ── */
 .sheet {
@@ -347,8 +409,23 @@ footer { padding: 40px 26px 56px; text-align: center; }
   .rise { opacity: 1; transform: none; }
 }
 </style>
+<script>
+/* 저장된 테마를 본문 그리기 전에 적용 (깜빡임 방지) */
+(() => { try { const t = localStorage.getItem("theme");
+  if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t);
+} catch {} })();
+</script>
 </head>
 <body>
+
+<button class="theme-toggle" id="themeToggle" type="button" aria-label="어두운 화면으로 전환">
+  <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="4.2" /><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6" />
+  </svg>
+  <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z" />
+  </svg>
+</button>
 
 <main class="sheet">
   <div class="band" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
@@ -652,6 +729,23 @@ $("#share").addEventListener("click", async () => {
   }
   copy(location.href, "링크를 복사했어요");
 });
+
+/* ── 테마 토글 ── */
+(() => {
+  const root = document.documentElement, btn = $("#themeToggle");
+  const prefersDark = () => matchMedia("(prefers-color-scheme: dark)").matches;
+  const isDark = () => root.getAttribute("data-theme") === "dark" ||
+                       (!root.hasAttribute("data-theme") && prefersDark());
+  const sync = () => btn.setAttribute("aria-label", isDark() ? "밝은 화면으로 전환" : "어두운 화면으로 전환");
+  btn.addEventListener("click", () => {
+    const next = isDark() ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("theme", next); } catch {}
+    sync();
+  });
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", sync);
+  sync();
+})();
 
 /* ── 스크롤 등장 ── */
 (() => {
