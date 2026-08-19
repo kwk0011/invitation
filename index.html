@@ -493,16 +493,21 @@ const CONFIG = {
     at: "2026-09-24T17:30",                       // 잔치 일시 (D-day 계산용)
     whenText: "2026년 9월 24일 목요일 오후 5시 30분",
     placeName: "씨마크 호텔 1층 더 레스토랑",
-    address: "강원특별자치도 강릉시 해안로406번길 2",   // ← 확인 후 수정해 주세요
+    address: "강원특별자치도 강릉시 해안로406번길 2",   // 화면에 표시되는 주소
+    mapQuery: "강릉시 해안로406번길 2",                 // 지도 앱에서 검색할 말 (비우면 위 주소로 검색)
     notes: [
       "주차는 무료입니다.",
-      "더 레스토랑은 호텔 1층에 있습니다."
+      "더 레스토랑은 호텔 1층에 있습니다.",
+      "레스토랑 문의 033-650-7044"
     ]
   },
 
   // 연락처를 넣으려면 아래처럼 채우세요. 비워 두면 전화 버튼이 나오지 않습니다.
   // 예) { label: "엄마에게 전화", phone: "010-1234-5678" }
-  contacts: [],
+  contacts: [
+    { label: "아빠에게 전화", phone: "010-9243-6144" },
+    { label: "엄마에게 전화", phone: "010-3494-0315" }
+  ],
 
   // 사진: 파일을 images/ 폴더에 넣고 경로를 적어 주세요. 첫 장이 대표 사진입니다.
   // 예) photos: ["images/1.jpg", "images/2.jpg", "images/3.jpg"]
@@ -609,7 +614,8 @@ $("#notes").innerHTML = CONFIG.event.notes.map(n => `<li>${n}</li>`).join("");
 /* ── 지도 ── */
 (() => {
   const addr = (CONFIG.event.address || "").trim();
-  const q = encodeURIComponent(`${CONFIG.event.placeName} ${addr}`.trim());
+  // 장소 이름까지 붙이면 검색이 실패해서, 도로명 주소만으로 검색합니다
+  const q = encodeURIComponent((CONFIG.event.mapQuery || addr || CONFIG.event.placeName).trim());
   $("#naver").href = `https://map.naver.com/p/search/${q}`;
   $("#kakao").href = `https://map.kakao.com/link/search/${q}`;
   // 주소가 비어 있으면 주소 줄과 복사 버튼을 숨깁니다
