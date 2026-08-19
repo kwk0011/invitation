@@ -10,26 +10,30 @@
 <meta property="og:title" content="루나의 첫 번째 생일에 초대합니다" />
 <meta property="og:description" content="2026년 9월 24일 목요일 오후 5시 30분 · 씨마크 호텔 1층 더 레스토랑" />
 <meta property="og:type" content="website" />
-<meta name="theme-color" content="#F1F4F2" />
+<meta name="theme-color" content="#FFFFFF" />
 <style>
 /* ─────────────────────────────────────────────
-   토큰 — 백자(白磁) 유백색 바탕 · 먹빛 글씨 · 낙관 홍색
-   색동 5색: 쪽빛 / 옥색 / 치자 / 홍 / 먹
+   토큰 — 흰 종이 바탕 · 먹빛 글씨 · 낙관 홍색
+   색동 띠 5색(파스텔): 쪽빛 / 옥색 / 치자 / 장미 / 안개
    ───────────────────────────────────────────── */
 :root {
-  --paper:      #F1F4F2;
-  --surface:    #FAFBFA;
-  --surface-2:  #E8EDEA;
-  --ink:        #232025;
+  /* 화이트 톤 고정 — 다크모드에서도 항상 밝게 보입니다 */
+  --paper:      #EDF1EF;   /* 넓은 화면에서 종이 바깥 여백 */
+  --surface:    #FFFFFF;   /* 초대장 본체 */
+  --surface-2:  #F1F5F3;   /* 사진 자리 등 */
+  --ink:        #2B2830;
   --ink-soft:   #6E6570;
-  --ink-faint:  #948C95;
-  --line:       #D8E0DB;
+  --ink-faint:  #9A929A;
+  --line:       #E5EBE7;
   --seal:       #B93A50;
   --seal-ink:   #FFF6F2;
-  --indigo:     #2F4B6E;
-  --jade:       #5F9C8B;
-  --gardenia:   #C39234;
-  --shadow:     0 1px 2px rgba(35,32,37,.05), 0 8px 24px -12px rgba(35,32,37,.22);
+  /* 색동 띠 — 밝은 톤으로 */
+  --indigo:     #7E9BBE;
+  --jade:       #8CC3B2;
+  --gardenia:   #E6C482;
+  --band-rose:  #D98A9B;
+  --band-mist:  #CDD6D1;
+  --shadow:     0 1px 2px rgba(43,40,48,.04), 0 8px 24px -14px rgba(43,40,48,.18);
 
   --font-display: "Nanum Myeongjo", AppleMyungjo, "Noto Serif KR", "Source Han Serif K", Batang, 바탕, Georgia, serif;
   --font-body: Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
@@ -40,38 +44,6 @@
   --step-2:  1.375rem;
   --step-3:  1.75rem;
   --measure: 27rem;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --paper:     #17141A;
-    --surface:   #201C25;
-    --surface-2: #2A242F;
-    --ink:       #EDE7EA;
-    --ink-soft:  #ABA2AC;
-    --ink-faint: #7E7580;
-    --line:      #332C38;
-    --seal:      #E4677E;
-    --seal-ink:  #1A1116;
-    --indigo:    #7C9BC6;
-    --jade:      #8FC7B6;
-    --gardenia:  #E3BA6C;
-    --shadow:    0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.7);
-  }
-}
-:root[data-theme="dark"] {
-  --paper:     #17141A;
-  --surface:   #201C25;
-  --surface-2: #2A242F;
-  --ink:       #EDE7EA;
-  --ink-soft:  #ABA2AC;
-  --ink-faint: #7E7580;
-  --line:      #332C38;
-  --seal:      #E4677E;
-  --seal-ink:  #1A1116;
-  --indigo:    #7C9BC6;
-  --jade:      #8FC7B6;
-  --gardenia:  #E3BA6C;
-  --shadow:    0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.7);
 }
 
 * { box-sizing: border-box; }
@@ -117,8 +89,8 @@ a { color: inherit; }
 .band > i:nth-child(1) { background: var(--indigo); }
 .band > i:nth-child(2) { background: var(--jade); }
 .band > i:nth-child(3) { background: var(--gardenia); }
-.band > i:nth-child(4) { background: var(--seal); }
-.band > i:nth-child(5) { background: var(--ink); }
+.band > i:nth-child(4) { background: var(--band-rose); }
+.band > i:nth-child(5) { background: var(--band-mist); }
 
 section { padding: 44px 26px; }
 section + section { border-top: 1px solid var(--line); }
@@ -210,7 +182,7 @@ p { margin: 0; }
   text-align: center;
   border-radius: 5px;
   transform: rotate(-7deg);
-  box-shadow: 0 6px 18px -8px rgba(0,0,0,.45);
+  box-shadow: 0 6px 16px -8px rgba(185,58,80,.35);
 }
 .seal small { display: block; font-size: .5rem; letter-spacing: .2em; opacity: .8; }
 
