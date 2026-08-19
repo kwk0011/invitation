@@ -3,3 +3,6 @@ artifact.html
 
 # Claude Code 로컬 설정
 .claude/
+
+# 사진 원본 (용량이 커서 배포에는 불필요)
+images/original/
