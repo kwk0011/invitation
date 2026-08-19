@@ -329,23 +329,6 @@ p { margin: 0; }
 }
 .notes li::before { content: "·"; color: var(--seal); font-weight: 700; }
 
-/* ── 계좌 ── */
-.acct {
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  padding: 14px 0; border-bottom: 1px dashed var(--line);
-}
-.acct:last-of-type { border-bottom: 0; }
-.acct div { min-width: 0; }
-.acct strong { display: block; font-size: var(--step--1); font-weight: 600; }
-.acct span { display: block; font-size: var(--step--1); color: var(--ink-soft); font-variant-numeric: tabular-nums; }
-.copy {
-  flex: none; cursor: pointer;
-  padding: 8px 13px; border-radius: 3px;
-  border: 1px solid var(--line); background: transparent; color: var(--ink-soft);
-  font-family: var(--font-body); font-size: .75rem; letter-spacing: .04em;
-}
-.copy:hover { border-color: var(--ink-faint); color: var(--ink); }
-
 /* ── 푸터 ── */
 footer { padding: 40px 26px 56px; text-align: center; }
 .footer__mark {
@@ -457,16 +440,6 @@ footer { padding: 40px 26px 56px; text-align: center; }
     <div class="btns" id="contacts" style="margin-top:22px"></div>
   </section>
 
-  <!-- ───── 마음 전하실 곳 ───── -->
-  <section class="rise">
-    <p class="eyebrow">마음 전하실 곳</p>
-    <h2>참석이 어려우신 분들을 위해</h2>
-    <p style="font-size:var(--step--1);color:var(--ink-soft);margin-bottom:6px">
-      계좌번호를 남깁니다. 축하해 주시는 마음만으로도 충분히 감사합니다.
-    </p>
-    <div id="accounts"></div>
-  </section>
-
   <!-- ───── 공유 ───── -->
   <section class="rise" style="text-align:center">
     <p class="eyebrow" style="justify-content:center">함께 나누기</p>
@@ -530,11 +503,6 @@ const CONFIG = {
   contacts: [
     { label: "아빠에게 전화", phone: "010-0000-0000" },
     { label: "엄마에게 전화", phone: "010-0000-0000" }
-  ],
-
-  accounts: [
-    { who: "아빠 김민준", bank: "국민은행", no: "000000-00-000000" },
-    { who: "엄마 박서연", bank: "신한은행", no: "000-000-000000" }
   ],
 
   // 사진: 파일을 images/ 폴더에 넣고 경로를 적어 주세요. 첫 장이 대표 사진입니다.
@@ -645,16 +613,6 @@ $("#notes").innerHTML = CONFIG.event.notes.map(n => `<li>${n}</li>`).join("");
 $("#contacts").innerHTML = CONFIG.contacts.map(c =>
   `<a class="btn" href="tel:${c.phone.replace(/[^0-9+]/g, "")}">${c.label}</a>`).join("");
 
-/* ── 계좌 ── */
-$("#accounts").innerHTML = CONFIG.accounts.map(a =>
-  `<div class="acct">
-     <div>
-       <strong>${a.who}</strong>
-       <span>${a.bank} ${a.no}</span>
-     </div>
-     <button class="copy" type="button" data-copy="${a.bank} ${a.no}">복사</button>
-   </div>`).join("");
-
 /* ── 복사 & 공유 ── */
 const toast = (() => {
   const el = $("#toast"); let t;
@@ -678,8 +636,6 @@ async function copy(text, done) {
 }
 
 document.addEventListener("click", e => {
-  const c = e.target.closest("[data-copy]");
-  if (c) copy(c.dataset.copy, "계좌번호를 복사했어요");
   if (e.target.closest("[data-copy-addr]")) copy(CONFIG.event.address, "주소를 복사했어요");
 });
 

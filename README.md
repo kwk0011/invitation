@@ -13,7 +13,6 @@
 | `greeting` | 인사말. `\n`이 줄바꿈입니다 |
 | `event` | 일시, 장소, 주소, 안내 사항(`notes`) |
 | `contacts` | 전화 걸기 버튼 |
-| `accounts` | 계좌번호 (필요 없으면 `[]`로 비우세요) |
 | `photos` | 사진 경로 목록 |
 | `grabs` | 돌잡이 항목과 문구 |
 
@@ -46,7 +45,7 @@ git push -u origin main
 저장소 → **Settings → Pages → Source: Deploy from a branch → main / (root)** → Save.
 1~2분 뒤 `https://<아이디>.github.io/<저장소이름>/` 으로 열립니다. 이 주소를 카톡으로 공유하면 됩니다.
 
-> 저장소는 **Public**이어야 무료 계정에서 Pages가 켜집니다. 계좌번호와 전화번호가 공개된다는 뜻이니, 부담스러우면 해당 항목을 비우거나 Netlify Drop(폴더를 끌어다 놓으면 끝) 같은 곳을 쓰세요.
+> 저장소는 **Public**이어야 무료 계정에서 Pages가 켜집니다. `contacts`에 적은 전화번호는 링크를 아는 누구나 볼 수 있으니, 필요 없으면 `contacts: []` 로 비우세요.
 
 ## 4. 카톡 미리보기 문구
 
@@ -63,4 +62,5 @@ git push -u origin main
 
 - 다크 모드를 자동으로 따라갑니다.
 - 돌잡이 선택은 방문자 브라우저에만 저장됩니다(집계 기능 없음).
-- `artifact.html`은 미리보기용으로 뽑아낸 파일입니다. 배포에는 `index.html`만 쓰면 됩니다.
+- 축의금·계좌 안내는 넣지 않았습니다.
+- 검색엔진 노출을 막는 `noindex` 태그가 들어 있습니다. 카톡 미리보기가 안 뜨면 `index.html` 상단의 해당 줄을 지우세요.
