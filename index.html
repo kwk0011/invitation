@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>하람이의 첫 번째 생일에 초대합니다</title>
-<meta name="description" content="2026년 9월 20일 일요일 낮 12시, 그랜드컨벤션 3층 다이아몬드홀" />
+<title>루나의 첫 번째 생일에 초대합니다</title>
+<meta name="description" content="2026년 9월 24일 목요일 오후 5시 30분, 씨마크 호텔 더 레스토랑" />
 <!-- 검색엔진 노출 차단. 카톡 미리보기가 안 뜨면 이 줄을 지우세요 -->
 <meta name="robots" content="noindex, nofollow" />
-<meta property="og:title" content="하람이의 첫 번째 생일에 초대합니다" />
-<meta property="og:description" content="2026년 9월 20일 일요일 낮 12시 · 그랜드컨벤션 3층 다이아몬드홀" />
+<meta property="og:title" content="루나의 첫 번째 생일에 초대합니다" />
+<meta property="og:description" content="2026년 9월 24일 목요일 오후 5시 30분 · 씨마크 호텔 더 레스토랑" />
 <meta property="og:type" content="website" />
 <meta name="theme-color" content="#F1F4F2" />
 <style>
@@ -378,11 +378,11 @@ footer { padding: 40px 26px 56px; text-align: center; }
     <div class="hero__body">
       <div class="seal" aria-hidden="true">돌<small>첫돌</small></div>
       <p class="hero__invite">초대합니다</p>
-      <h1 class="hero__name" data-bind="babyName">김하람</h1>
+      <h1 class="hero__name" data-bind="babyName">김루나</h1>
       <p class="hero__hanja" data-bind="babySub">첫 번째 생일</p>
       <div class="hero__rule" aria-hidden="true"></div>
-      <p class="hero__when" data-bind="whenText">2026년 9월 20일 일요일 낮 12시</p>
-      <p class="hero__where" data-bind="whereText">그랜드컨벤션 3층 다이아몬드홀</p>
+      <p class="hero__when" data-bind="whenText">2026년 9월 24일 목요일 오후 5시 30분</p>
+      <p class="hero__where" data-bind="whereText">씨마크 호텔 더 레스토랑</p>
       <p class="dday"><span>돌잔치까지</span> <b data-bind="dday">D-32</b></p>
     </div>
   </header>
@@ -393,7 +393,7 @@ footer { padding: 40px 26px 56px; text-align: center; }
     <p class="greeting" data-bind="greeting"></p>
     <div class="signers">
       <p><span data-bind="fatherLabel">김민준</span> · <span data-bind="motherLabel">박서연</span>의 <span data-bind="relation">첫째 딸</span></p>
-      <p><b data-bind="babyNameOnly">하람</b></p>
+      <p><b data-bind="babyNameOnly">루나</b></p>
     </div>
   </section>
 
@@ -426,10 +426,10 @@ footer { padding: 40px 26px 56px; text-align: center; }
   <!-- ───── 오시는 길 ───── -->
   <section class="rise">
     <p class="eyebrow">오시는 길</p>
-    <h2 data-bind="whenTextShort">2026년 9월 20일 일요일 낮 12시</h2>
+    <h2 data-bind="whenTextShort">2026년 9월 24일 목요일 오후 5시 30분</h2>
     <p class="place">
-      <span style="font-family:var(--font-display);font-size:var(--step-1);color:var(--ink);display:block;margin:0" data-bind="placeName">그랜드컨벤션 3층 다이아몬드홀</span>
-      <span data-bind="placeAddr">서울특별시 강남구 테헤란로 123</span>
+      <span style="font-family:var(--font-display);font-size:var(--step-1);color:var(--ink);display:block;margin:0" data-bind="placeName">씨마크 호텔 더 레스토랑</span>
+      <span data-bind="placeAddr"></span>
     </p>
     <div class="btns">
       <a class="btn" id="naver" href="#" target="_blank" rel="noopener">네이버 지도</a>
@@ -465,13 +465,13 @@ footer { padding: 40px 26px 56px; text-align: center; }
    ══════════════════════════════════════════════════════ */
 const CONFIG = {
   baby: {
-    name: "김하람",          // 아이 이름 (전체)
-    shortName: "하람",       // 부르는 이름
+    name: "김루나",          // 아이 이름 (전체)
+    shortName: "루나",       // 부르는 이름
     sub: "첫 번째 생일",      // 이름 아래 작은 글씨 (한자 이름을 넣어도 좋아요)
-    birth: "2025-09-14",     // 태어난 날 YYYY-MM-DD
+    birth: "2025-09-14",     // ← 루나 실제 생일로 바꿔 주세요 YYYY-MM-DD
     facts: [                 // 자유롭게 추가/삭제
       { k: "태어난 날", v: "2025년 9월 14일" },
-      { k: "이름 뜻",  v: "하늘이 준 아이라는 뜻으로 지었습니다" },
+      { k: "이름 뜻",  v: "달처럼 은은하게 빛나라는 뜻으로 지었습니다" },
       { k: "좋아하는 것", v: "산책, 바나나, 아빠 안경" },
       { k: "요즘 하는 말", v: "엄마, 아빠, 그리고 “어부바”" }
     ]
@@ -482,21 +482,20 @@ const CONFIG = {
   greeting:
     "작은 손으로 세상을 처음 만나던 날이\n" +
     "엊그제 같은데 벌써 한 해가 지났습니다.\n\n" +
-    "서툰 걸음마다 웃음을 주었던 하람이가\n" +
+    "서툰 걸음마다 웃음을 주었던 루나가\n" +
     "첫 번째 생일을 맞이합니다.\n\n" +
     "귀한 걸음으로 축복해 주시면\n" +
     "더없이 큰 기쁨이 되겠습니다.",
 
   event: {
-    at: "2026-09-20T12:00",                       // 잔치 일시 (D-day 계산용)
-    whenText: "2026년 9월 20일 일요일 낮 12시",
-    placeName: "그랜드컨벤션 3층 다이아몬드홀",
-    address: "서울특별시 강남구 테헤란로 123",
+    at: "2026-09-24T17:30",                       // 잔치 일시 (D-day 계산용)
+    whenText: "2026년 9월 24일 목요일 오후 5시 30분",
+    placeName: "씨마크 호텔 더 레스토랑",
+    address: "",                                  // ← 도로명 주소를 넣어 주세요 (비우면 장소 이름으로만 검색됩니다)
     notes: [
-      "지하 주차장 3시간 무료입니다. 입구에서 차량번호를 등록해 주세요.",
-      "2호선 역삼역 3번 출구에서 도보 5분 거리입니다.",
-      "돌잡이는 낮 1시에 시작합니다.",
-      "포토테이블은 홀 입구 오른편에 준비되어 있습니다."
+      "주차 안내는 확인 후 채워 주세요.",
+      "돌잡이는 오후 6시에 시작합니다.",
+      "포토테이블은 입구 오른편에 준비되어 있습니다."
     ]
   },
 
@@ -526,6 +525,13 @@ const $  = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const bind = (k, v) => $$(`[data-bind="${k}"]`).forEach(el => el.textContent = v);
 
+/* 받침이 있으면 "하람이", 없으면 "루나" — 이름 뒤 접미사 처리 */
+const hasBatchim = s => {
+  const c = s.charCodeAt(s.length - 1);
+  return c >= 0xAC00 && c <= 0xD7A3 && (c - 0xAC00) % 28 !== 0;
+};
+const NAME_I = CONFIG.baby.shortName + (hasBatchim(CONFIG.baby.shortName) ? "이" : "");
+
 /* ── 텍스트 채우기 ── */
 bind("babyName", CONFIG.baby.name);
 bind("babyNameOnly", CONFIG.baby.shortName);
@@ -539,7 +545,7 @@ bind("whenTextShort", CONFIG.event.whenText);
 bind("whereText", CONFIG.event.placeName);
 bind("placeName", CONFIG.event.placeName);
 bind("placeAddr", CONFIG.event.address);
-document.title = `${CONFIG.baby.shortName}이의 첫 번째 생일에 초대합니다`;
+document.title = `${NAME_I}의 첫 번째 생일에 초대합니다`;
 
 /* ── D-day ── */
 (() => {
@@ -562,11 +568,11 @@ $("#notes").innerHTML = CONFIG.event.notes.map(n => `<li>${n}</li>`).join("");
 (() => {
   const photos = CONFIG.photos;
   if (photos.length) {
-    $(".hero__frame").innerHTML = `<img src="${photos[0]}" alt="${CONFIG.baby.shortName}이 대표 사진" />`;
+    $(".hero__frame").innerHTML = `<img src="${photos[0]}" alt="${NAME_I} 대표 사진" />`;
   }
   const list = photos.length ? photos : Array.from({ length: 3 }, (_, i) => null);
   $("#gallery").innerHTML = list.map((src, i) => src
-    ? `<figure><img src="${src}" loading="lazy" alt="${CONFIG.baby.shortName}이 사진 ${i + 1}" /></figure>`
+    ? `<figure><img src="${src}" loading="lazy" alt="${NAME_I} 사진 ${i + 1}" /></figure>`
     : `<figure><div class="ph"><span>寫</span><span>사진 ${i + 1}</span></div></figure>`
   ).join("");
   $("#dots").innerHTML = list.map((_, i) => `<i class="${i ? "" : "on"}"></i>`).join("");
@@ -604,9 +610,15 @@ $("#notes").innerHTML = CONFIG.event.notes.map(n => `<li>${n}</li>`).join("");
 
 /* ── 지도 ── */
 (() => {
-  const q = encodeURIComponent(`${CONFIG.event.placeName} ${CONFIG.event.address}`);
+  const addr = (CONFIG.event.address || "").trim();
+  const q = encodeURIComponent(`${CONFIG.event.placeName} ${addr}`.trim());
   $("#naver").href = `https://map.naver.com/p/search/${q}`;
   $("#kakao").href = `https://map.kakao.com/link/search/${q}`;
+  // 주소가 비어 있으면 주소 줄과 복사 버튼을 숨깁니다
+  if (!addr) {
+    $$('[data-bind="placeAddr"]').forEach(el => el.hidden = true);
+    $("[data-copy-addr]")?.remove();
+  }
 })();
 
 /* ── 연락처 ── */
@@ -642,7 +654,7 @@ document.addEventListener("click", e => {
 $("#copyLink").addEventListener("click", () => copy(location.href, "링크를 복사했어요"));
 $("#share").addEventListener("click", async () => {
   const data = {
-    title: `${CONFIG.baby.shortName}이의 첫 번째 생일`,
+    title: `${NAME_I}의 첫 번째 생일`,
     text: `${CONFIG.event.whenText} · ${CONFIG.event.placeName}`,
     url: location.href
   };
