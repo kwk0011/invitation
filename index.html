@@ -10,30 +10,34 @@
 <meta property="og:title" content="루나의 첫 번째 생일에 초대합니다" />
 <meta property="og:description" content="2026년 9월 24일 목요일 오후 5시 30분 · 씨마크 호텔 1층 더 레스토랑" />
 <meta property="og:type" content="website" />
-<meta name="theme-color" content="#FFFFFF" />
+<meta name="color-scheme" content="light" />
+<meta name="theme-color" content="#FCF8F1" />
 <style>
 /* ─────────────────────────────────────────────
-   토큰 — 흰 종이 바탕 · 먹빛 글씨 · 낙관 홍색
+   토큰 — 따뜻한 아이보리 바탕 · 먹빛 글씨 · 낙관 홍색
    색동 띠 5색(파스텔): 쪽빛 / 옥색 / 치자 / 장미 / 안개
    ───────────────────────────────────────────── */
 :root {
-  /* 화이트 톤 고정 — 다크모드에서도 항상 밝게 보입니다 */
-  --paper:      #EDF1EF;   /* 넓은 화면에서 종이 바깥 여백 */
-  --surface:    #FFFFFF;   /* 초대장 본체 */
-  --surface-2:  #F1F5F3;   /* 사진 자리 등 */
-  --ink:        #2B2830;
-  --ink-soft:   #6E6570;
-  --ink-faint:  #9A929A;
-  --line:       #E5EBE7;
+  /* 브라우저의 "강제 다크모드"에서 빠져나오기 — 항상 밝게 */
+  color-scheme: only light;
+
+  /* 따뜻한 아이보리 */
+  --paper:      #EFE7D9;   /* 넓은 화면에서 종이 바깥 여백 */
+  --surface:    #FCF8F1;   /* 초대장 본체 */
+  --surface-2:  #F4EDE1;   /* 사진 자리 등 */
+  --ink:        #332E2A;
+  --ink-soft:   #6B6155;
+  --ink-faint:  #8A7F70;
+  --line:       #E7DECD;
   --seal:       #B93A50;
   --seal-ink:   #FFF6F2;
-  /* 색동 띠 — 밝은 톤으로 */
-  --indigo:     #7E9BBE;
-  --jade:       #8CC3B2;
-  --gardenia:   #E6C482;
+  /* 색동 띠 — 아이보리에 맞춘 파스텔 */
+  --indigo:     #8397B0;
+  --jade:       #93BCA9;
+  --gardenia:   #E3C079;
   --band-rose:  #D98A9B;
-  --band-mist:  #CDD6D1;
-  --shadow:     0 1px 2px rgba(43,40,48,.04), 0 8px 24px -14px rgba(43,40,48,.18);
+  --band-mist:  #DCD2C2;
+  --shadow:     0 1px 2px rgba(51,46,42,.05), 0 8px 24px -14px rgba(51,46,42,.2);
 
   --font-display: "Nanum Myeongjo", AppleMyungjo, "Noto Serif KR", "Source Han Serif K", Batang, 바탕, Georgia, serif;
   --font-body: Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
@@ -42,7 +46,6 @@
   --step-0:  .9375rem;
   --step-1:  1.0625rem;
   --step-2:  1.375rem;
-  --step-3:  1.75rem;
   --measure: 27rem;
 }
 
