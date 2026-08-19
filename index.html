@@ -75,6 +75,8 @@
 }
 
 * { box-sizing: border-box; }
+/* .btns 등 display 지정이 [hidden]을 덮지 않도록 */
+[hidden] { display: none !important; }
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
@@ -392,7 +394,7 @@ footer { padding: 40px 26px 56px; text-align: center; }
     <p class="eyebrow">인사말</p>
     <p class="greeting" data-bind="greeting"></p>
     <div class="signers">
-      <p><span data-bind="fatherLabel">김민준</span> · <span data-bind="motherLabel">박서연</span>의 <span data-bind="relation">첫째 딸</span></p>
+      <p data-bind="parentsLine">김소연 · 김경원의 첫째 딸</p>
       <p><b data-bind="babyNameOnly">루나</b></p>
     </div>
   </section>
@@ -468,16 +470,16 @@ const CONFIG = {
     name: "김루나",          // 아이 이름 (전체)
     shortName: "루나",       // 부르는 이름
     sub: "첫 번째 생일",      // 이름 아래 작은 글씨 (한자 이름을 넣어도 좋아요)
-    birth: "2025-09-14",     // ← 루나 실제 생일로 바꿔 주세요 YYYY-MM-DD
+    birth: "2025-09-22",
     facts: [                 // 자유롭게 추가/삭제
-      { k: "태어난 날", v: "2025년 9월 14일" },
-      { k: "이름 뜻",  v: "달처럼 은은하게 빛나라는 뜻으로 지었습니다" },
-      { k: "좋아하는 것", v: "산책, 바나나, 아빠 안경" },
-      { k: "요즘 하는 말", v: "엄마, 아빠, 그리고 “어부바”" }
+      { k: "태어난 날", v: "2025년 9월 22일" },
+      { k: "좋아하는 것", v: "산책, 딸기, 아빠 안경" },
+      { k: "요즘 하는 말", v: "엄마, 빠빠, 맘마" }
     ]
   },
 
-  parents: { father: "김민준", mother: "박서연", relation: "첫째 딸" },
+  // 적어 주신 순서 그대로 나옵니다
+  parents: { names: ["김소연", "김경원"], relation: "첫째 딸" },
 
   greeting:
     "작은 손으로 세상을 처음 만나던 날이\n" +
@@ -498,10 +500,9 @@ const CONFIG = {
     ]
   },
 
-  contacts: [
-    { label: "아빠에게 전화", phone: "010-0000-0000" },
-    { label: "엄마에게 전화", phone: "010-0000-0000" }
-  ],
+  // 연락처를 넣으려면 아래처럼 채우세요. 비워 두면 전화 버튼이 나오지 않습니다.
+  // 예) { label: "엄마에게 전화", phone: "010-1234-5678" }
+  contacts: [],
 
   // 사진: 파일을 images/ 폴더에 넣고 경로를 적어 주세요. 첫 장이 대표 사진입니다.
   // 예) photos: ["images/1.jpg", "images/2.jpg", "images/3.jpg"]
@@ -536,9 +537,7 @@ bind("babyName", CONFIG.baby.name);
 bind("babyNameOnly", CONFIG.baby.shortName);
 bind("babySub", CONFIG.baby.sub);
 bind("greeting", CONFIG.greeting);
-bind("fatherLabel", CONFIG.parents.father);
-bind("motherLabel", CONFIG.parents.mother);
-bind("relation", CONFIG.parents.relation);
+bind("parentsLine", `${CONFIG.parents.names.join(" · ")}의 ${CONFIG.parents.relation}`);
 bind("whenText", CONFIG.event.whenText);
 bind("whenTextShort", CONFIG.event.whenText);
 bind("whereText", CONFIG.event.placeName);
@@ -620,9 +619,13 @@ $("#notes").innerHTML = CONFIG.event.notes.map(n => `<li>${n}</li>`).join("");
   }
 })();
 
-/* ── 연락처 ── */
-$("#contacts").innerHTML = CONFIG.contacts.map(c =>
-  `<a class="btn" href="tel:${c.phone.replace(/[^0-9+]/g, "")}">${c.label}</a>`).join("");
+/* ── 연락처 (없으면 영역 자체를 숨김) ── */
+if (CONFIG.contacts.length) {
+  $("#contacts").innerHTML = CONFIG.contacts.map(c =>
+    `<a class="btn" href="tel:${c.phone.replace(/[^0-9+]/g, "")}">${c.label}</a>`).join("");
+} else {
+  $("#contacts").hidden = true;
+}
 
 /* ── 복사 & 공유 ── */
 const toast = (() => {
