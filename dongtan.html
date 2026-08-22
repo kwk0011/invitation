@@ -1,0 +1,1113 @@
+<!doctype html>
+<!-- 이 파일은 make-dongtan.py 가 index.html 에서 만들어 냅니다.
+     여기를 직접 고치면 다음에 스크립트를 돌릴 때 지워집니다.
+     내용을 바꾸려면 index.html 을, 장소를 바꾸려면 make-dongtan.py 를 고치세요. -->
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>루나의 첫 번째 생일에 초대합니다</title>
+<meta name="description" content="2026년 9월 24일 목요일 오후 5시 30분, 씨마크 호텔 1층 더 레스토랑" />
+<!-- 검색엔진 노출 차단. 카톡 미리보기가 안 뜨면 이 줄을 지우세요 -->
+<meta name="robots" content="noindex, nofollow" />
+<meta property="og:title" content="루나의 첫 번째 생일에 초대합니다" />
+<meta property="og:description" content="2026년 9월 24일 목요일 오후 5시 30분 · 화성 동탄 루나네 집" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="https://kwk0011.github.io/invitation/images/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="color-scheme" content="light dark" />
+<meta name="theme-color" content="#FCF8F1" />
+<style>
+/* ─────────────────────────────────────────────
+   토큰 — 따뜻한 아이보리 바탕 · 먹빛 글씨 · 낙관 홍색
+   색동 띠 5색(파스텔): 쪽빛 / 옥색 / 치자 / 장미 / 안개
+   ───────────────────────────────────────────── */
+:root {
+  color-scheme: light dark;
+
+  /* 따뜻한 아이보리 */
+  --paper:      #EFE7D9;   /* 넓은 화면에서 종이 바깥 여백 */
+  --surface:    #FCF8F1;   /* 초대장 본체 */
+  --surface-2:  #F4EDE1;   /* 사진 자리 등 */
+  --ink:        #332E2A;
+  --ink-soft:   #6B6155;
+  --ink-faint:  #8A7F70;
+  --line:       #E7DECD;
+  --seal:       #B93A50;
+  --seal-ink:   #FFF6F2;
+  /* 색동 띠 — 아이보리에 맞춘 파스텔 */
+  --indigo:     #8397B0;
+  --jade:       #93BCA9;
+  --gardenia:   #E3C079;
+  --band-rose:  #D98A9B;
+  --band-mist:  #DCD2C2;
+  --shadow:     0 1px 2px rgba(51,46,42,.05), 0 8px 24px -14px rgba(51,46,42,.2);
+
+  --font-display: "Nanum Myeongjo", AppleMyungjo, "Noto Serif KR", "Source Han Serif K", Batang, 바탕, Georgia, serif;
+  --font-body: Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+
+  --step--1: .8125rem;
+  --step-0:  .9375rem;
+  --step-1:  1.0625rem;
+  --step-2:  1.375rem;
+  --measure: 27rem;
+}
+
+/* 다크 테마 — 시스템 설정을 따르되, 아래 토글로 직접 바꾸면 그게 우선 */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+  --paper:      #171310;
+  --surface:    #1F1A16;
+  --surface-2:  #2A241E;
+  --ink:        #F0E8DC;
+  --ink-soft:   #B5A895;
+  --ink-faint:  #8E8272;
+  --line:       #362E26;
+  --seal:       #E4778A;
+  --seal-ink:   #2A1015;
+  --indigo:     #7C9BC6;
+  --jade:       #8FC7B6;
+  --gardenia:   #E3BA6C;
+  --band-rose:  #C9707F;
+  --band-mist:  #4A4238;
+  --shadow:     0 1px 2px rgba(0,0,0,.4), 0 8px 24px -14px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper:      #171310;
+  --surface:    #1F1A16;
+  --surface-2:  #2A241E;
+  --ink:        #F0E8DC;
+  --ink-soft:   #B5A895;
+  --ink-faint:  #8E8272;
+  --line:       #362E26;
+  --seal:       #E4778A;
+  --seal-ink:   #2A1015;
+  --indigo:     #7C9BC6;
+  --jade:       #8FC7B6;
+  --gardenia:   #E3BA6C;
+  --band-rose:  #C9707F;
+  --band-mist:  #4A4238;
+  --shadow:     0 1px 2px rgba(0,0,0,.4), 0 8px 24px -14px rgba(0,0,0,.7);
+}
+:root[data-theme="light"] { color-scheme: light; }
+
+* { box-sizing: border-box; }
+/* .btns 등 display 지정이 [hidden]을 덮지 않도록 */
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+/* 한지 결 — 아주 옅게 */
+body::before {
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0;
+  opacity: .5;
+  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.055'/%3E%3C/svg%3E");
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--seal); outline-offset: 3px; border-radius: 4px; }
+
+/* ── 테마 토글 ── */
+.theme-toggle {
+  position: fixed; top: 12px; right: 12px; z-index: 40;
+  width: 38px; height: 38px; padding: 0;
+  display: grid; place-content: center;
+  cursor: pointer;
+  border: 1px solid var(--line); border-radius: 50%;
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  color: var(--ink-soft);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  transition: color .2s, border-color .2s;
+}
+.theme-toggle:hover { color: var(--ink); border-color: var(--ink-faint); }
+.theme-toggle svg { width: 17px; height: 17px; display: block; }
+.theme-toggle .icon-moon { display: none; }
+:root[data-theme="dark"] .theme-toggle .icon-moon { display: block; }
+:root[data-theme="dark"] .theme-toggle .icon-sun { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .icon-moon { display: block; }
+  :root:not([data-theme="light"]) .theme-toggle .icon-sun { display: none; }
+}
+
+/* ── 뼈대 ── */
+.sheet {
+  position: relative; z-index: 1;
+  max-width: var(--measure);
+  margin: 0 auto;
+  background: var(--surface);
+  border-inline: 1px solid var(--line);
+  min-height: 100dvh;
+}
+@media (max-width: 27rem) { .sheet { border-inline: 0; } }
+
+.band { display: flex; height: 5px; }
+.band > i { flex: 1; }
+.band > i:nth-child(1) { background: var(--indigo); }
+.band > i:nth-child(2) { background: var(--jade); }
+.band > i:nth-child(3) { background: var(--gardenia); }
+.band > i:nth-child(4) { background: var(--band-rose); }
+.band > i:nth-child(5) { background: var(--band-mist); }
+
+section { padding: 44px 26px; }
+section + section { border-top: 1px solid var(--line); }
+
+.eyebrow {
+  display: flex; align-items: center; gap: 9px;
+  margin: 0 0 18px;
+  font-size: .6875rem; font-weight: 600;
+  letter-spacing: .22em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+}
+.eyebrow::before {
+  content: ""; width: 16px; height: 3px; flex: none;
+  background: var(--seal);
+}
+h2 {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -.01em;
+  margin: 0 0 20px;
+  text-wrap: balance;
+}
+p { margin: 0; }
+
+/* ── 히어로 ── */
+.hero { padding: 0 0 46px; text-align: center; }
+.hero__frame {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.hero__frame img { width: 100%; height: 100%; object-fit: cover; }
+/* 표지 슬라이드쇼: 사진을 겹쳐 두고 투명도만 바꿔 부드럽게 교차합니다 */
+.hero__slide {
+  position: absolute; inset: 0; z-index: 0;
+  opacity: 0; transform: scale(1.045);
+  /* 사라질 때는 확대를 바로 되돌리되, 다 사라진 뒤(1.2s)에 처리해 티가 나지 않게 합니다 */
+  transition: opacity 1.2s ease-in-out, transform 0s linear 1.2s;
+}
+.hero__slide.is-on {
+  opacity: 1; transform: scale(1.1);
+  transition: opacity 1.2s ease-in-out, transform 7s linear;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__slide, .hero__slide.is-on { transform: none; transition: opacity .4s linear; }
+}
+.hero__frame::after {
+  content: "";
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg, transparent 55%, color-mix(in srgb, var(--surface) 92%, transparent) 100%);
+}
+.ph {
+  position: absolute; inset: 0;
+  display: grid; place-content: center; gap: 6px;
+  color: var(--ink-faint);
+  font-size: var(--step--1);
+  letter-spacing: .18em;
+  text-align: center;
+}
+.ph span:first-child { font-family: var(--font-display); font-size: 1.5rem; letter-spacing: .3em; }
+
+.hero__body { padding: 0 26px; margin-top: -34px; position: relative; z-index: 2; }
+.hero__invite {
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  letter-spacing: .42em;
+  color: var(--ink-soft);
+  margin-bottom: 14px;
+}
+.hero__name {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 15vw, 3.25rem);
+  line-height: 1.15;
+  letter-spacing: .06em;
+  margin: 0 0 4px;
+  font-weight: 400;
+}
+.hero__hanja { color: var(--ink-faint); font-size: var(--step--1); letter-spacing: .34em; }
+.hero__rule { width: 1px; height: 32px; background: var(--line); margin: 20px auto; }
+.hero__when {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  letter-spacing: .03em;
+  line-height: 1.7;
+}
+.hero__where { color: var(--ink-soft); font-size: var(--step--1); margin-top: 6px; }
+
+/* 낙관 도장 */
+.seal {
+  position: absolute; right: 24px; top: -60px;
+  width: 62px; height: 62px;
+  display: grid; place-content: center;
+  background: var(--seal);
+  color: var(--seal-ink);
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  letter-spacing: .06em;
+  line-height: 1.1;
+  text-align: center;
+  border-radius: 5px;
+  transform: rotate(-7deg);
+  box-shadow: 0 6px 16px -8px rgba(185,58,80,.35);
+}
+.seal small { display: block; font-size: .5rem; letter-spacing: .2em; opacity: .8; }
+
+.dday {
+  display: inline-flex; align-items: baseline; gap: 7px;
+  margin-top: 22px; padding: 7px 16px;
+  border: 1px solid var(--line); border-radius: 999px;
+  font-size: var(--step--1); color: var(--ink-soft);
+}
+.dday b {
+  font-family: var(--font-display); font-size: var(--step-1);
+  color: var(--seal); font-weight: 400; font-variant-numeric: tabular-nums;
+}
+
+/* ── 인사말 ── */
+.greeting {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  line-height: 2.15;
+  text-align: center;
+  color: var(--ink);
+  white-space: pre-line;
+}
+.signers {
+  margin-top: 30px; padding-top: 22px;
+  border-top: 1px solid var(--line);
+  display: grid; gap: 7px;
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+  text-align: center;
+}
+.signers b { font-weight: 600; color: var(--ink); }
+
+/* ── 아이 소개 ── */
+.facts { display: grid; gap: 0; }
+.fact {
+  display: grid; grid-template-columns: 5.5rem 1fr;
+  gap: 12px; padding: 13px 0;
+  border-bottom: 1px dashed var(--line);
+  font-size: var(--step-0);
+}
+.fact:last-child { border-bottom: 0; }
+.fact dt { color: var(--ink-faint); font-size: var(--step--1); letter-spacing: .06em; }
+.fact dd {
+  margin: 0;
+  font-family: var(--font-display);   /* 인사말·이름과 같은 명조로 통일 */
+  font-size: var(--step-1);
+  line-height: 1.7;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── 갤러리 ── */
+.gallery {
+  display: grid; grid-auto-flow: column;
+  grid-auto-columns: 78%;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 14px;
+  margin-inline: -26px; padding-inline: 26px;
+  scrollbar-width: none;
+}
+.gallery::-webkit-scrollbar { display: none; }
+.gallery > figure {
+  position: relative; margin: 0;
+  aspect-ratio: 4 / 5;
+  background: var(--surface-2);
+  scroll-snap-align: center;
+  overflow: hidden;
+}
+.gallery img { width: 100%; height: 100%; object-fit: cover; }
+.gallery > figure { cursor: zoom-in; }
+.gallery > figure:focus-visible { outline: 2px solid var(--seal); outline-offset: 2px; }
+.gallery figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 22px 12px 9px;
+  font-family: var(--font-display); font-size: var(--step--1); letter-spacing: .08em;
+  color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.45);
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,.42));
+}
+
+/* 사진이 많을 때는 점 대신 얇은 막대로 위치를 표시합니다 */
+.prog { height: 2px; border-radius: 2px; background: var(--line); overflow: hidden; margin-top: 4px; }
+.prog i { display: block; height: 100%; background: var(--seal); transform-origin: left; transition: transform .18s ease-out; }
+
+/* ── 사진 확대 보기 ── */
+.lb {
+  position: fixed; inset: 0; z-index: 60;
+  display: grid; grid-template-rows: 1fr auto;
+  place-items: center;
+  background: rgba(18, 16, 15, .94);
+  padding: 44px 16px 26px;
+  overscroll-behavior: contain;
+}
+.lb[hidden] { display: none; }
+.lb__img {
+  max-width: 100%; max-height: 100%;
+  object-fit: contain; border-radius: 3px;
+  background: rgba(255,255,255,.04);
+}
+.lb__cap {
+  margin: 14px 0 0; color: rgba(255,255,255,.82);
+  font-family: var(--font-display); font-size: var(--step-0); letter-spacing: .1em;
+}
+.lb__x, .lb__nav {
+  position: absolute; appearance: none; cursor: pointer;
+  background: rgba(255,255,255,.1); color: #fff;
+  border: 0; border-radius: 50%;
+  width: 42px; height: 42px; line-height: 1;
+  font-size: 1.5rem; font-family: var(--font-body);
+  display: grid; place-content: center;
+}
+.lb__x { top: 12px; right: 12px; font-size: 1.25rem; }
+.lb__nav { top: 50%; transform: translateY(-50%); }
+.lb__nav--prev { left: 10px; }
+.lb__nav--next { right: 10px; }
+.lb__x:active, .lb__nav:active { background: rgba(255,255,255,.22); }
+@media (max-width: 420px) { .lb__nav { width: 36px; height: 36px; } }
+
+/* ── 숫자 뽑기 (이스터에그) ── */
+.draw {
+  position: fixed; inset: 0; z-index: 70;
+  display: grid; place-content: center; justify-items: center;
+  gap: 4px; padding: 26px;
+  background: rgba(18, 16, 15, .96);
+  text-align: center;
+}
+.draw[hidden] { display: none; }
+.draw__label {
+  font-family: var(--font-display); font-size: var(--step--1);
+  letter-spacing: .34em; color: rgba(255,255,255,.5);
+  margin: 0 0 6px;
+}
+.draw__num {
+  font-family: var(--font-display);
+  font-size: clamp(5.5rem, 34vw, 11rem);
+  line-height: 1; color: #fff; margin: 0;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 4px 30px rgba(0,0,0,.5);
+}
+.draw__num.is-rolling { color: rgba(255,255,255,.45); }
+.draw__btns { display: flex; gap: 8px; margin-top: 26px; }
+.draw__btn {
+  appearance: none; cursor: pointer;
+  padding: 12px 24px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.28);
+  background: transparent; color: #fff;
+  font-family: var(--font-body); font-size: var(--step--1); letter-spacing: .06em;
+}
+.draw__btn--go { background: var(--seal); border-color: var(--seal); color: var(--seal-ink); }
+.draw__btn:active { transform: scale(.97); }
+
+.dots { display: flex; gap: 6px; justify-content: center; margin-top: 4px; }
+.dots i { width: 5px; height: 5px; border-radius: 50%; background: var(--line); transition: background .25s, transform .25s; }
+.dots i.on { background: var(--seal); transform: scale(1.35); }
+
+/* ── 돌잡이 ── */
+.grabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+/* 마지막 줄에 한 칸만 남으면 가로로 채웁니다 */
+.grabs > :last-child:nth-child(3n + 1) { grid-column: 1 / -1; }
+.grab {
+  appearance: none; cursor: pointer;
+  display: grid; gap: 4px; place-items: center;
+  padding: 15px 6px;
+  background: var(--surface); color: var(--ink);
+  border: 1px solid var(--line); border-radius: 3px;
+  font-family: var(--font-body); font-size: var(--step--1);
+  transition: border-color .2s, background .2s, transform .12s;
+}
+.grab:active { transform: scale(.97); }
+.grab em {
+  font-family: var(--font-display); font-style: normal;
+  font-size: var(--step-2); color: var(--ink); line-height: 1.2;
+}
+.grab small { color: var(--ink-faint); font-size: .6875rem; letter-spacing: .08em; }
+.grab[aria-pressed="true"] { border-color: var(--seal); background: color-mix(in srgb, var(--seal) 8%, var(--surface)); }
+.grab[aria-pressed="true"] em { color: var(--seal); }
+.grab-result {
+  margin-top: 14px; padding: 14px 16px;
+  background: var(--surface-2); border-radius: 3px;
+  font-size: var(--step--1); line-height: 1.8; color: var(--ink-soft);
+  min-height: 3.5rem;
+}
+.grab-result b { color: var(--ink); font-weight: 600; }
+
+/* ── 오시는 길 ── */
+.place { font-family: var(--font-display); font-size: var(--step-1); line-height: 1.6; }
+.place span { display: block; font-family: var(--font-body); font-size: var(--step--1); color: var(--ink-soft); margin-top: 6px; }
+.btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.btn {
+  flex: 1 1 auto; min-width: 6.5rem;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 12px 14px;
+  border: 1px solid var(--line); border-radius: 3px;
+  background: var(--surface); color: var(--ink);
+  font-family: var(--font-body); font-size: var(--step--1); font-weight: 500;
+  text-decoration: none; cursor: pointer;
+  transition: border-color .2s, background .2s;
+}
+.btn:hover { border-color: var(--ink-faint); }
+.btn--solid { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.btn--seal { background: var(--seal); color: var(--seal-ink); border-color: var(--seal); }
+.notes { margin-top: 22px; display: grid; gap: 9px; padding: 0; list-style: none; }
+.notes li {
+  display: grid; grid-template-columns: auto 1fr; gap: 9px;
+  font-size: var(--step--1); color: var(--ink-soft); line-height: 1.7;
+}
+.notes li::before { content: "·"; color: var(--seal); font-weight: 700; }
+
+/* ── 푸터 ── */
+footer { padding: 40px 26px 56px; text-align: center; }
+.footer__mark {
+  font-family: var(--font-display); font-size: var(--step-2);
+  letter-spacing: .5em; color: var(--seal); margin-bottom: 14px; text-indent: .5em;
+}
+.footer__msg { font-family: var(--font-display); font-size: var(--step-0); color: var(--ink-soft); line-height: 2; }
+
+/* 토스트 */
+.toast {
+  position: fixed; left: 50%; bottom: 28px; z-index: 50;
+  transform: translate(-50%, 14px);
+  padding: 10px 18px; border-radius: 999px;
+  background: var(--ink); color: var(--paper);
+  font-size: var(--step--1);
+  opacity: 0; pointer-events: none;
+  transition: opacity .24s, transform .24s;
+  box-shadow: var(--shadow);
+}
+.toast.on { opacity: 1; transform: translate(-50%, 0); }
+
+/* 모션 */
+.rise { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
+.rise.in { opacity: 1; transform: none; }
+@keyframes stamp {
+  0%   { opacity: 0; transform: rotate(-7deg) scale(1.9); }
+  60%  { opacity: 1; transform: rotate(-7deg) scale(.94); }
+  100% { opacity: 1; transform: rotate(-7deg) scale(1); }
+}
+.seal { animation: stamp .5s cubic-bezier(.2,.8,.3,1) .55s both; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  .rise { opacity: 1; transform: none; }
+}
+</style>
+<script>
+/* 저장된 테마를 본문 그리기 전에 적용 (깜빡임 방지) */
+(() => { try { const t = localStorage.getItem("theme");
+  if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t);
+} catch {} })();
+</script>
+</head>
+<body>
+
+<button class="theme-toggle" id="themeToggle" type="button" aria-label="어두운 화면으로 전환">
+  <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="4.2" /><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6" />
+  </svg>
+  <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z" />
+  </svg>
+</button>
+
+<main class="sheet">
+  <div class="band" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
+  <!-- ───── 히어로 ───── -->
+  <header class="hero">
+    <div class="hero__frame">
+      <div class="ph"><span>寫</span><span>대표 사진</span></div>
+    </div>
+    <div class="hero__body">
+      <div class="seal" aria-hidden="true">돌<small>첫돌</small></div>
+      <p class="hero__invite">초대합니다</p>
+      <h1 class="hero__name" data-bind="babyName">김루나</h1>
+      <p class="hero__hanja" data-bind="babySub">첫 번째 생일</p>
+      <div class="hero__rule" aria-hidden="true"></div>
+      <p class="hero__when" data-bind="whenText">2026년 9월 24일 목요일 오후 5시 30분</p>
+      <p class="hero__where" data-bind="whereText">씨마크 호텔 1층 더 레스토랑</p>
+      <p class="dday"><span>돌잔치까지</span> <b data-bind="dday">D-32</b></p>
+    </div>
+  </header>
+
+  <!-- ───── 인사말 ───── -->
+  <section class="rise">
+    <p class="eyebrow">인사말</p>
+    <p class="greeting" data-bind="greeting"></p>
+    <div class="signers">
+      <p data-bind="parentsLine">김소연 · 김경원의 첫째 딸</p>
+      <p><b data-bind="babyNameOnly">루나</b></p>
+    </div>
+  </section>
+
+  <!-- ───── 아이 소개 ───── -->
+  <section class="rise">
+    <p class="eyebrow">우리 아이</p>
+    <h2>한 해 동안 이렇게 자랐습니다</h2>
+    <dl class="facts" id="facts"></dl>
+  </section>
+
+  <!-- ───── 사진 ───── -->
+  <section class="rise">
+    <p class="eyebrow">사진</p>
+    <h2>지나온 열두 달</h2>
+    <div class="gallery" id="gallery"></div>
+    <div class="dots" id="dots" aria-hidden="true"></div>
+  </section>
+
+  <!-- ───── 돌잡이 ───── -->
+  <section class="rise">
+    <p class="eyebrow">돌잡이</p>
+    <h2>어떤 사람으로 자랄까요?</h2>
+    <p style="font-size:var(--step--1);color:var(--ink-soft);margin-bottom:16px">
+      무엇이 될지보다 어떤 마음으로 자랄지가 궁금해, 여섯 마리 동물에 소원을 하나씩 담았습니다.
+      하나를 골라 주세요. 맞히신 분께 작은 선물을 드립니다.
+    </p>
+    <div class="grabs" id="grabs"></div>
+    <p class="grab-result" id="grabResult">아직 고르지 않으셨어요.</p>
+  </section>
+
+  <!-- ───── 오시는 길 ───── -->
+  <section class="rise">
+    <p class="eyebrow">오시는 길</p>
+    <h2 data-bind="whenTextShort">2026년 9월 24일 목요일 오후 5시 30분</h2>
+    <p class="place">
+      <span style="font-family:var(--font-display);font-size:var(--step-1);color:var(--ink);display:block;margin:0" data-bind="placeName">씨마크 호텔 1층 더 레스토랑</span>
+      <span data-bind="placeAddr">강원특별자치도 강릉시 해안로406번길 2</span>
+    </p>
+    <div class="btns">
+      <a class="btn" id="naver" href="#" target="_blank" rel="noopener">네이버 지도</a>
+      <a class="btn" id="kakao" href="#" target="_blank" rel="noopener">카카오맵</a>
+      <button class="btn" type="button" data-copy-addr>주소 복사</button>
+    </div>
+    <ul class="notes" id="notes"></ul>
+    <div class="btns" id="contacts" style="margin-top:22px"></div>
+  </section>
+
+  <!-- ───── 공유 ───── -->
+  <section class="rise" style="text-align:center">
+    <p class="eyebrow" style="justify-content:center">함께 나누기</p>
+    <div class="btns">
+      <button class="btn btn--seal" type="button" id="share">초대장 공유하기</button>
+      <button class="btn" type="button" id="copyLink">링크 복사</button>
+    </div>
+  </section>
+
+  <footer>
+    <p class="footer__mark">첫돌</p>
+    <p class="footer__msg">귀한 걸음으로 축복해 주세요.<br />오래 기억할 하루가 되겠습니다.</p>
+  </footer>
+
+  <div class="band" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- ───── 사진 확대 보기 ───── -->
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="사진 크게 보기">
+  <img class="lb__img" id="lbImg" alt="" />
+  <p class="lb__cap" id="lbCap"></p>
+  <button class="lb__x" id="lbClose" type="button" aria-label="닫기">✕</button>
+  <button class="lb__nav lb__nav--prev" id="lbPrev" type="button" aria-label="이전 사진">‹</button>
+  <button class="lb__nav lb__nav--next" id="lbNext" type="button" aria-label="다음 사진">›</button>
+</div>
+
+<!-- ───── 숫자 뽑기 (이스터에그) ─────
+     여는 법 ① 맨 아래 "첫돌" 글자를 2.5초 안에 세 번 누르기
+              ② 주소 뒤에 ?draw 붙이기 (행사 당일엔 이쪽이 확실합니다)  -->
+<div class="draw" id="draw" hidden role="dialog" aria-modal="true" aria-label="숫자 뽑기">
+  <p class="draw__label">행운의 숫자</p>
+  <p class="draw__num" id="drawNum" aria-live="polite">—</p>
+  <div class="draw__btns">
+    <button class="draw__btn draw__btn--go" id="drawGo" type="button">뽑기</button>
+    <button class="draw__btn" id="drawClose" type="button">닫기</button>
+  </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════
+   ▼▼▼ 여기만 고치면 됩니다 ▼▼▼
+   ══════════════════════════════════════════════════════ */
+const CONFIG = {
+  baby: {
+    name: "김루나",          // 아이 이름 (전체)
+    shortName: "루나",       // 부르는 이름
+    sub: "첫 번째 생일",      // 이름 아래 작은 글씨 (한자 이름을 넣어도 좋아요)
+    birth: "2025-09-22",
+    facts: [                 // 자유롭게 추가/삭제
+      { k: "태어난 날", v: "2025년 9월 22일" },
+      { k: "좋아하는 것", v: "산책, 딸기, 아빠 안경" },
+      { k: "요즘 하는 말", v: "엄마, 압빠, 맘마" }
+    ]
+  },
+
+  // 적어 주신 순서 그대로 나옵니다
+  parents: { names: ["김소연", "김경원"], relation: "첫째 딸" },
+
+  greeting:
+    "작은 손으로 세상을 처음 만나던 날이\n" +
+    "엊그제 같은데 벌써 한 해가 지났습니다.\n\n" +
+    "서툰 걸음마다 웃음을 주었던 루나가\n" +
+    "첫 번째 생일을 맞이합니다.\n\n" +
+    "귀한 걸음으로 축복해 주시면\n" +
+    "더없이 큰 기쁨이 되겠습니다.",
+
+  event: {
+    at: "2026-09-24T17:30",                       // 잔치 일시 (D-day 계산용)
+    whenText: "2026년 9월 24일 목요일 오후 5시 30분",
+    placeName: "루나네 집",
+    address: "경기도 화성시 동탄숲속로 69, 836동 1801호",   // 화면에 표시되는 주소
+    mapQuery: "화성시 동탄숲속로 69",                       // 지도 앱에서 검색할 말 (동·호수는 빼야 검색됩니다)
+    notes: [
+      // 주차 방법, 공동현관 비밀번호 같은 안내를 여기에 적으세요.
+      // 예) "지하 주차장으로 오시면 836동과 바로 이어집니다."
+    ]
+  },
+
+  // 연락처를 넣으려면 아래처럼 채우세요. 비워 두면 전화 버튼이 나오지 않습니다.
+  // 예) { label: "엄마에게 전화", phone: "010-1234-5678" }
+  contacts: [
+    { label: "아빠에게 전화", phone: "010-9243-6144" },
+    { label: "엄마에게 전화", phone: "010-3494-0315" }
+  ],
+
+  // 표지 슬라이드쇼: 맨 위 사진이 순서대로 겹쳐 넘어갑니다.
+  // 한 장만 남기면 슬라이드쇼 없이 그 사진으로 고정되고, 비워 두면 아래 photos의 첫 장을 씁니다.
+  heroPhotos: [
+    "images/hero-1.jpg", "images/hero-2.jpg", "images/hero-3.jpg",
+    "images/hero-4.jpg", "images/hero-5.jpg", "images/hero-6.jpg"
+  ],
+  heroSeconds: 4.5,   // 한 장이 머무는 시간(초)
+
+  // 숫자 뽑기(이스터에그): 몇 번부터 몇 번까지 뽑을지
+  draw: { min: 1, max: 100 },
+
+  // 사진: 월령 순서대로, 한 달에 두 장씩. 클릭하면 크게 볼 수 있습니다.
+  photos: [
+    { src: "images/m-00.jpg", cap: "1개월" },
+    { src: "images/m-01.jpg", cap: "1개월" },
+    { src: "images/m-02.jpg", cap: "2개월" },
+    { src: "images/m-03.jpg", cap: "2개월" },
+    { src: "images/m-04.jpg", cap: "3개월" },
+    { src: "images/m-05.jpg", cap: "3개월" },
+    { src: "images/m-06.jpg", cap: "4개월" },
+    { src: "images/m-07.jpg", cap: "4개월" },
+    { src: "images/m-08.jpg", cap: "5개월" },
+    { src: "images/m-09.jpg", cap: "5개월" },
+    { src: "images/m-10.jpg", cap: "6개월" },
+    { src: "images/m-11.jpg", cap: "6개월" },
+    { src: "images/m-12.jpg", cap: "7개월" },
+    { src: "images/m-13.jpg", cap: "7개월" },
+    { src: "images/m-14.jpg", cap: "8개월" },
+    { src: "images/m-15.jpg", cap: "8개월" },
+    { src: "images/m-16.jpg", cap: "9개월" },
+    { src: "images/m-17.jpg", cap: "9개월" },
+    { src: "images/m-18.jpg", cap: "10개월" },
+    { src: "images/m-19.jpg", cap: "10개월" },
+    { src: "images/m-20.jpg", cap: "11개월" },
+    { src: "images/m-21.jpg", cap: "11개월" }
+  ],
+
+  // 직업이 아니라 "어떤 사람으로 자랐으면 하는지"를 고르는 돌잡이입니다.
+  // 소품은 동물 여섯 마리, 설명은 두 가지 버전을 준비해 뒀습니다.
+  //   A. 뜻 버전 (지금 켜져 있음) — 신화를 몰라도 바로 읽힙니다
+  //   B. 그리스 신 버전 — 아래 주석 안에 들어 있습니다
+  grabs: [
+    { item: "부엉이", hint: "지혜",   say: "어두울 때에도 눈을 크게 뜨는 새예요. 멀리 보고 깊이 생각하는 사람이 되겠네요." },
+    { item: "사자",   hint: "용기",   say: "제 몸보다 큰 것 앞에서도 물러서지 않는 짐승이에요. 두려운 순간에 한 걸음 내딛는 사람이 되겠어요." },
+    { item: "강아지", hint: "사랑",   say: "누가 오든 꼬리부터 흔드는 동물이에요. 다정한 마음으로 주위를 따뜻하게 만드는 사람이 되겠네요." },
+    { item: "수탉",   hint: "희망",   say: "가장 어두운 시각에 먼저 우는 새예요. 긴 밤 끝에도 아침을 믿는 사람이 되겠어요." },
+    { item: "말",     hint: "탐험",   say: "길이 없는 들판을 제일 먼저 달려 보는 동물이에요. 낯선 곳 앞에서도 설레며 나아가는 사람이 되겠네요." },
+    { item: "거북이", hint: "꾸준함", say: "느려도 멈추지 않아 끝내 닿는 동물이에요. 서두르지 않고 매일 조금씩 해내는 사람이 되겠어요." }
+  ]
+,
+
+  // B. 그리스 신 버전 — 주소 뒤에 ?v=greek 을 붙이면 이 문구로 바뀝니다.
+  // 버튼(동물·뜻)은 위와 똑같고 결과 문구만 달라집니다. 안 쓰기로 하면 이 배열만 지우세요.
+  grabsGreek: [
+    { item: "부엉이", hint: "지혜",   say: "아테나는 싸움조차 지혜로 이긴 여신이었어요. 멀리 보고 깊이 생각하는 사람이 되겠네요." },
+    { item: "사자",   hint: "용기",   say: "헤라클레스는 열두 가지 과업을 하나도 피하지 않았어요. 두려운 순간에 한 걸음 내딛는 사람이 되겠어요." },
+    { item: "강아지", hint: "사랑",   say: "아프로디테는 신들조차 마음을 어쩌지 못하게 만든 사랑의 여신이에요. 다정한 마음으로 주위를 따뜻하게 만드는 사람이 되겠네요." },
+    { item: "수탉",   hint: "희망",   say: "아폴론은 하루도 거르지 않고 아침을 몰고 온 태양의 신이에요. 긴 밤 끝에도 아침을 믿는 사람이 되겠어요." },
+    { item: "말",     hint: "탐험",   say: "헤르메스는 길 떠나는 이를 지켜 주던 여행의 신이에요. 낯선 곳 앞에서도 설레며 나아가는 사람이 되겠네요." },
+    { item: "거북이", hint: "꾸준함", say: "데메테르는 씨를 뿌리고 계절을 기다려 거두는 대지의 여신이에요. 서두르지 않고 매일 조금씩 해내는 사람이 되겠어요." }
+  ]
+};
+/* ══════════════════════════════════════════════════════
+   ▲▲▲ 여기까지 ▲▲▲  아래는 손대지 않아도 됩니다
+   ══════════════════════════════════════════════════════ */
+
+const $  = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const bind = (k, v) => $$(`[data-bind="${k}"]`).forEach(el => el.textContent = v);
+
+/* 받침이 있으면 "하람이", 없으면 "루나" — 이름 뒤 접미사 처리 */
+const hasBatchim = s => {
+  const c = s.charCodeAt(s.length - 1);
+  return c >= 0xAC00 && c <= 0xD7A3 && (c - 0xAC00) % 28 !== 0;
+};
+const NAME_I = CONFIG.baby.shortName + (hasBatchim(CONFIG.baby.shortName) ? "이" : "");
+
+/* ── 텍스트 채우기 ── */
+bind("babyName", CONFIG.baby.name);
+bind("babyNameOnly", CONFIG.baby.shortName);
+bind("babySub", CONFIG.baby.sub);
+bind("greeting", CONFIG.greeting);
+bind("parentsLine", `${CONFIG.parents.names.join(" · ")}의 ${CONFIG.parents.relation}`);
+bind("whenText", CONFIG.event.whenText);
+bind("whenTextShort", CONFIG.event.whenText);
+bind("whereText", CONFIG.event.placeName);
+bind("placeName", CONFIG.event.placeName);
+bind("placeAddr", CONFIG.event.address);
+document.title = `${NAME_I}의 첫 번째 생일에 초대합니다`;
+
+/* ── D-day ── */
+(() => {
+  const day = 864e5;
+  const target = new Date(CONFIG.event.at);
+  if (isNaN(target)) return;
+  const startOf = d => new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+  const diff = Math.round((startOf(target) - startOf(new Date())) / day);
+  bind("dday", diff > 0 ? `D-${diff}` : diff === 0 ? "D-DAY" : `D+${-diff}`);
+})();
+
+/* ── 소개 항목 ── */
+$("#facts").innerHTML = CONFIG.baby.facts
+  .map(f => `<div class="fact"><dt>${f.k}</dt><dd>${f.v}</dd></div>`).join("");
+
+/* ── 안내 사항 ── */
+$("#notes").innerHTML = CONFIG.event.notes.map(n => `<li>${n}</li>`).join("");
+
+/* ── 사진 ── */
+(() => {
+  /* 문자열로 적어도, {src, cap}으로 적어도 둘 다 받습니다 */
+  const list = (CONFIG.photos || []).map(p => typeof p === "string" ? { src: p, cap: "" } : p);
+  const g = $("#gallery");
+
+  if (!list.length) {
+    g.innerHTML = Array.from({ length: 3 }, (_, i) =>
+      `<figure><div class="ph"><span>寫</span><span>사진 ${i + 1}</span></div></figure>`).join("");
+    return;
+  }
+
+  g.innerHTML = list.map((p, i) =>
+    `<figure tabindex="0" role="button" aria-label="${p.cap || `사진 ${i + 1}`} 크게 보기" data-i="${i}">
+       <img src="${p.src}" loading="lazy" alt="${NAME_I} ${p.cap || `사진 ${i + 1}`}" />
+       ${p.cap ? `<figcaption>${p.cap}</figcaption>` : ""}
+     </figure>`).join("");
+
+  /* 장수가 많으면 점 대신 막대로 */
+  const many = list.length > 10;
+  const dotsBox = $("#dots");
+  dotsBox.innerHTML = many
+    ? `<div class="prog"><i style="transform:scaleX(0)"></i></div>`
+    : list.map((_, i) => `<i class="${i ? "" : "on"}"></i>`).join("");
+  if (many) dotsBox.style.display = "block";
+
+  const bar = many ? $("i", dotsBox) : null;
+  const dots = many ? [] : $$("#dots i");
+  g.addEventListener("scroll", () => {
+    if (many) {
+      const max = g.scrollWidth - g.clientWidth;
+      const seen = (g.scrollLeft + g.clientWidth) / g.scrollWidth;
+      bar.style.transform = `scaleX(${max <= 0 ? 1 : Math.min(1, seen)})`;
+      return;
+    }
+    const i = Math.round(g.scrollLeft / (g.scrollWidth / list.length));
+    dots.forEach((d, n) => d.classList.toggle("on", n === Math.min(i, list.length - 1)));
+  }, { passive: true });
+  g.dispatchEvent(new Event("scroll"));
+
+  /* ── 확대 보기 ── */
+  const lb = $("#lb"), lbImg = $("#lbImg"), lbCap = $("#lbCap");
+  let at = 0, opener = null;
+
+  const show = i => {
+    at = (i + list.length) % list.length;
+    lbImg.src = list[at].src;
+    lbImg.alt = `${NAME_I} ${list[at].cap || `사진 ${at + 1}`}`;
+    lbCap.textContent = list[at].cap ? `${list[at].cap} · ${at + 1} / ${list.length}` : `${at + 1} / ${list.length}`;
+  };
+  const open = i => {
+    opener = document.activeElement;
+    show(i);
+    lb.hidden = false;
+    document.body.style.overflow = "hidden";
+    $("#lbClose").focus();
+  };
+  const close = () => {
+    lb.hidden = true;
+    lbImg.removeAttribute("src");
+    document.body.style.overflow = "";
+    if (opener && opener.focus) opener.focus();
+  };
+
+  g.addEventListener("click", e => {
+    const f = e.target.closest("figure[data-i]");
+    if (f) open(+f.dataset.i);
+  });
+  g.addEventListener("keydown", e => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    const f = e.target.closest("figure[data-i]");
+    if (f) { e.preventDefault(); open(+f.dataset.i); }
+  });
+
+  $("#lbClose").addEventListener("click", close);
+  $("#lbPrev").addEventListener("click", () => show(at - 1));
+  $("#lbNext").addEventListener("click", () => show(at + 1));
+  /* 사진이나 버튼이 아닌 배경을 누르면 닫습니다 */
+  lb.addEventListener("click", e => { if (e.target === lb) close(); });
+  document.addEventListener("keydown", e => {
+    if (lb.hidden) return;
+    if (e.key === "Escape") close();
+    else if (e.key === "ArrowLeft") show(at - 1);
+    else if (e.key === "ArrowRight") show(at + 1);
+  });
+
+  /* 좌우로 밀어서 넘기기 */
+  let x0 = null;
+  lb.addEventListener("touchstart", e => { x0 = e.changedTouches[0].clientX; }, { passive: true });
+  lb.addEventListener("touchend", e => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 45) show(at + (dx < 0 ? 1 : -1));
+    x0 = null;
+  }, { passive: true });
+})();
+
+/* ── 표지 슬라이드쇼 ── */
+(() => {
+  const frame = $(".hero__frame");
+  const list = (CONFIG.heroPhotos || []).length ? CONFIG.heroPhotos : (CONFIG.photos || []).slice(0, 1);
+  if (!frame || !list.length) return;
+
+  /* 첫 장만 바로 받고, 나머지는 차례가 오기 직전에 받습니다 */
+  frame.innerHTML = list.map((src, i) =>
+    `<img class="hero__slide" data-src="${src}"${i === 0 ? ` src="${src}" fetchpriority="high"` : ""}
+          alt="${i === 0 ? NAME_I + " 대표 사진" : ""}" />`).join("");
+
+  const slides = $$(".hero__slide", frame);
+  const show = i => {
+    slides.forEach((s, n) => {
+      if (n === i && !s.src) s.src = s.dataset.src;
+      s.classList.toggle("is-on", n === i);
+    });
+    const next = slides[(i + 1) % slides.length];
+    if (!next.src) next.src = next.dataset.src;
+  };
+  show(0);
+  if (slides.length < 2) return;
+
+  const wait = Math.max(1.5, CONFIG.heroSeconds || 4.5) * 1000;
+  let at = 0, timer = null;
+  const stop = () => { clearInterval(timer); timer = null; };
+  const play = () => { stop(); timer = setInterval(() => show(at = (at + 1) % slides.length), wait); };
+  play();
+  /* 다른 탭에 가 있는 동안은 넘기지 않습니다 */
+  document.addEventListener("visibilitychange", () => document.hidden ? stop() : play());
+})();
+
+/* ── 돌잡이 ── */
+(() => {
+  const wrap = $("#grabs"), out = $("#grabResult");
+
+  /* ?v=greek 이면 그리스 신 버전 문구를 씁니다 */
+  const greek = /^(greek|b)$/i.test(new URLSearchParams(location.search).get("v") || "");
+  const items = (greek && (CONFIG.grabsGreek || []).length) ? CONFIG.grabsGreek : CONFIG.grabs;
+  if (greek) $(".grabs").closest("section").querySelector(".eyebrow").textContent = "돌잡이 · 신화 버전";
+
+  wrap.innerHTML = items.map((g, i) =>
+    `<button class="grab" type="button" aria-pressed="false" data-i="${i}">
+       <em>${g.item}</em><small>${g.hint}</small>
+     </button>`).join("");
+
+  const pick = i => {
+    $$(".grab", wrap).forEach(b => b.setAttribute("aria-pressed", b.dataset.i === String(i)));
+    const g = items[i];
+    out.innerHTML = `<b>${g.item}</b>${hasBatchim(g.item) ? "을" : "를"} 고르셨어요. ${g.say}`;
+    try { localStorage.setItem("doljabi.v2", i); } catch {}
+  };
+  wrap.addEventListener("click", e => {
+    const b = e.target.closest(".grab");
+    if (b) pick(+b.dataset.i);
+  });
+  try {
+    const saved = localStorage.getItem("doljabi.v2");
+    if (saved !== null && items[+saved]) pick(+saved);
+  } catch {}
+})();
+
+/* ── 숫자 뽑기 (이스터에그) ──
+   매번 전체 범위에서 새로 뽑습니다. 같은 수가 또 나오면 그 번호를 가진 분들께 함께 드리면 됩니다. */
+(() => {
+  const box = $("#draw");
+  if (!box) return;
+  const { min = 1, max = 100 } = CONFIG.draw || {};
+  const numEl = $("#drawNum"), goEl = $("#drawGo");
+  const pick = () => min + Math.floor(Math.random() * (max - min + 1));
+
+  const slow = typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let rolling = false;
+
+  const draw = () => {
+    if (rolling) return;
+    const hit = pick();
+    const settle = () => {
+      rolling = false;
+      numEl.classList.remove("is-rolling");
+      numEl.textContent = hit;
+      goEl.disabled = false;
+    };
+    if (slow) return settle();
+
+    rolling = true;
+    numEl.classList.add("is-rolling");
+    goEl.disabled = true;
+    const started = Date.now();
+    const spin = setInterval(() => {
+      numEl.textContent = pick();
+      if (Date.now() - started > 900) { clearInterval(spin); settle(); }
+    }, 55);
+  };
+
+  const open = () => {
+    box.hidden = false;
+    document.body.style.overflow = "hidden";
+    numEl.textContent = "—";
+    goEl.disabled = false;
+    goEl.focus();
+  };
+  const close = () => { box.hidden = true; document.body.style.overflow = ""; };
+
+  goEl.addEventListener("click", draw);
+  $("#drawClose").addEventListener("click", close);
+  document.addEventListener("keydown", e => {
+    if (box.hidden) return;
+    if (e.key === "Escape") close();
+    else if (e.key === "Enter") draw();
+  });
+
+  /* 여는 법 ① 바닥의 "첫돌"을 2.5초 안에 세 번 */
+  const mark = $(".footer__mark");
+  if (mark) {
+    let hits = 0, since = 0;
+    mark.style.cursor = "default";
+    mark.addEventListener("click", () => {
+      const now = Date.now();
+      hits = now - since > 2500 ? 1 : hits + 1;
+      since = now;
+      if (hits >= 3) { hits = 0; open(); }
+    });
+  }
+  /* 여는 법 ② 주소 뒤에 ?draw */
+  if (new URLSearchParams(location.search).has("draw")) open();
+})();
+
+/* ── 지도 ── */
+(() => {
+  const addr = (CONFIG.event.address || "").trim();
+  // 장소 이름까지 붙이면 검색이 실패해서, 도로명 주소만으로 검색합니다
+  const q = encodeURIComponent((CONFIG.event.mapQuery || addr || CONFIG.event.placeName).trim());
+  $("#naver").href = `https://map.naver.com/p/search/${q}`;
+  $("#kakao").href = `https://map.kakao.com/link/search/${q}`;
+  // 주소가 비어 있으면 주소 줄과 복사 버튼을 숨깁니다
+  if (!addr) {
+    $$('[data-bind="placeAddr"]').forEach(el => el.hidden = true);
+    $("[data-copy-addr]")?.remove();
+  }
+})();
+
+/* ── 연락처 (없으면 영역 자체를 숨김) ── */
+if (CONFIG.contacts.length) {
+  $("#contacts").innerHTML = CONFIG.contacts.map(c =>
+    `<a class="btn" href="tel:${c.phone.replace(/[^0-9+]/g, "")}">${c.label}</a>`).join("");
+} else {
+  $("#contacts").hidden = true;
+}
+
+/* ── 복사 & 공유 ── */
+const toast = (() => {
+  const el = $("#toast"); let t;
+  return msg => {
+    el.textContent = msg; el.classList.add("on");
+    clearTimeout(t); t = setTimeout(() => el.classList.remove("on"), 1900);
+  };
+})();
+
+async function copy(text, done) {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch {
+    const ta = document.createElement("textarea");
+    ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); } catch {}
+    ta.remove();
+  }
+  toast(done);
+}
+
+document.addEventListener("click", e => {
+  if (e.target.closest("[data-copy-addr]")) copy(CONFIG.event.address, "주소를 복사했어요");
+});
+
+$("#copyLink").addEventListener("click", () => copy(location.href, "링크를 복사했어요"));
+$("#share").addEventListener("click", async () => {
+  const data = {
+    title: `${NAME_I}의 첫 번째 생일`,
+    text: `${CONFIG.event.whenText} · ${CONFIG.event.placeName}`,
+    url: location.href
+  };
+  if (navigator.share) {
+    try { await navigator.share(data); return; } catch { return; }
+  }
+  copy(location.href, "링크를 복사했어요");
+});
+
+/* ── 테마 토글 ── */
+(() => {
+  const root = document.documentElement, btn = $("#themeToggle");
+  const prefersDark = () => matchMedia("(prefers-color-scheme: dark)").matches;
+  const isDark = () => root.getAttribute("data-theme") === "dark" ||
+                       (!root.hasAttribute("data-theme") && prefersDark());
+  const sync = () => btn.setAttribute("aria-label", isDark() ? "밝은 화면으로 전환" : "어두운 화면으로 전환");
+  btn.addEventListener("click", () => {
+    const next = isDark() ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("theme", next); } catch {}
+    sync();
+  });
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", sync);
+  sync();
+})();
+
+/* ── 스크롤 등장 ── */
+(() => {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
+  }, { threshold: .12, rootMargin: "0px 0px -8% 0px" });
+  $$(".rise").forEach(el => io.observe(el));
+})();
+</script>
+</body>
+</html>
