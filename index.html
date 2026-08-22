@@ -383,6 +383,48 @@ p { margin: 0; }
 .lb__nav--next { right: 10px; }
 .lb__x:active, .lb__nav:active { background: rgba(255,255,255,.22); }
 @media (max-width: 420px) { .lb__nav { width: 36px; height: 36px; } }
+
+/* ── 숫자 뽑기 (이스터에그) ── */
+.draw {
+  position: fixed; inset: 0; z-index: 70;
+  display: grid; place-content: center; justify-items: center;
+  gap: 4px; padding: 26px;
+  background: rgba(18, 16, 15, .96);
+  text-align: center;
+}
+.draw[hidden] { display: none; }
+.draw__label {
+  font-family: var(--font-display); font-size: var(--step--1);
+  letter-spacing: .34em; color: rgba(255,255,255,.5);
+  margin: 0 0 6px;
+}
+.draw__num {
+  font-family: var(--font-display);
+  font-size: clamp(5.5rem, 34vw, 11rem);
+  line-height: 1; color: #fff; margin: 0;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 4px 30px rgba(0,0,0,.5);
+}
+.draw__num.is-rolling { color: rgba(255,255,255,.45); }
+.draw__btns { display: flex; gap: 8px; margin-top: 26px; }
+.draw__btn {
+  appearance: none; cursor: pointer;
+  padding: 12px 24px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.28);
+  background: transparent; color: #fff;
+  font-family: var(--font-body); font-size: var(--step--1); letter-spacing: .06em;
+}
+.draw__btn--go { background: var(--seal); border-color: var(--seal); color: var(--seal-ink); }
+.draw__btn:active { transform: scale(.97); }
+.draw__foot {
+  margin: 20px 0 0; font-size: .75rem; letter-spacing: .06em;
+  color: rgba(255,255,255,.42);
+}
+.draw__reset {
+  appearance: none; background: none; border: 0; cursor: pointer;
+  color: rgba(255,255,255,.62); font-size: .75rem;
+  font-family: var(--font-body); text-decoration: underline; padding: 4px;
+}
 .dots { display: flex; gap: 6px; justify-content: center; margin-top: 4px; }
 .dots i { width: 5px; height: 5px; border-radius: 50%; background: var(--line); transition: background .25s, transform .25s; }
 .dots i.on { background: var(--seal); transform: scale(1.35); }
@@ -595,6 +637,19 @@ footer { padding: 40px 26px 56px; text-align: center; }
   <button class="lb__nav lb__nav--next" id="lbNext" type="button" aria-label="다음 사진">›</button>
 </div>
 
+<!-- ───── 숫자 뽑기 (이스터에그) ─────
+     여는 법 ① 맨 아래 "첫돌" 글자를 2.5초 안에 다섯 번 누르기
+              ② 주소 뒤에 ?draw 붙이기 (행사 당일엔 이쪽이 확실합니다)  -->
+<div class="draw" id="draw" hidden role="dialog" aria-modal="true" aria-label="숫자 뽑기">
+  <p class="draw__label">행운의 숫자</p>
+  <p class="draw__num" id="drawNum" aria-live="polite">—</p>
+  <div class="draw__btns">
+    <button class="draw__btn draw__btn--go" id="drawGo" type="button">뽑기</button>
+    <button class="draw__btn" id="drawClose" type="button">닫기</button>
+  </div>
+  <p class="draw__foot"><span id="drawCount"></span> <button class="draw__reset" id="drawReset" type="button">처음부터</button></p>
+</div>
+
 <script>
 /* ══════════════════════════════════════════════════════
    ▼▼▼ 여기만 고치면 됩니다 ▼▼▼
@@ -650,6 +705,9 @@ const CONFIG = {
     "images/hero-4.jpg", "images/hero-5.jpg", "images/hero-6.jpg"
   ],
   heroSeconds: 4.5,   // 한 장이 머무는 시간(초)
+
+  // 숫자 뽑기(이스터에그): 몇 번부터 몇 번까지 뽑을지
+  draw: { min: 1, max: 100 },
 
   // 사진: 월령 순서대로, 한 달에 두 장씩. 클릭하면 크게 볼 수 있습니다.
   photos: [
@@ -904,6 +962,92 @@ $("#notes").innerHTML = CONFIG.event.notes.map(n => `<li>${n}</li>`).join("");
     const saved = localStorage.getItem("doljabi.v2");
     if (saved !== null && items[+saved]) pick(+saved);
   } catch {}
+})();
+
+/* ── 숫자 뽑기 (이스터에그) ──
+   같은 수가 다시 나오지 않게 뽑은 수를 기억합니다. 새로고침해도 남습니다. */
+(() => {
+  const box = $("#draw");
+  if (!box) return;
+  const { min = 1, max = 100 } = CONFIG.draw || {};
+  const total = max - min + 1;
+  const KEY = "draw.used";
+  const numEl = $("#drawNum"), goEl = $("#drawGo"), countEl = $("#drawCount");
+
+  const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch { return []; } };
+  const save = u => { try { localStorage.setItem(KEY, JSON.stringify(u)); } catch {} };
+  let used = load().filter(n => n >= min && n <= max);
+
+  const sync = () => {
+    const left = total - used.length;
+    countEl.textContent = used.length ? `${used.length}개 뽑음 · ${left}개 남음 ·` : "";
+    goEl.textContent = left ? (used.length ? "다시 뽑기" : "뽑기") : "다 뽑았어요";
+    goEl.disabled = !left;
+    goEl.style.opacity = left ? "" : ".45";
+  };
+
+  const slow = typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let rolling = false;
+
+  const draw = () => {
+    const pool = [];
+    for (let n = min; n <= max; n++) if (!used.includes(n)) pool.push(n);
+    if (!pool.length || rolling) return;
+    const hit = pool[Math.floor(Math.random() * pool.length)];
+
+    const settle = () => {
+      rolling = false;
+      numEl.classList.remove("is-rolling");
+      numEl.textContent = hit;
+      used.push(hit); save(used); sync();
+    };
+    if (slow) return settle();
+
+    rolling = true;
+    numEl.classList.add("is-rolling");
+    goEl.disabled = true;
+    const started = Date.now();
+    const spin = setInterval(() => {
+      numEl.textContent = pool[Math.floor(Math.random() * pool.length)];
+      if (Date.now() - started > 900) { clearInterval(spin); settle(); }
+    }, 55);
+  };
+
+  const open = () => {
+    box.hidden = false;
+    document.body.style.overflow = "hidden";
+    numEl.textContent = "—";
+    sync();
+    goEl.focus();
+  };
+  const close = () => { box.hidden = true; document.body.style.overflow = ""; };
+
+  goEl.addEventListener("click", draw);
+  $("#drawClose").addEventListener("click", close);
+  $("#drawReset").addEventListener("click", () => {
+    used = []; save(used); numEl.textContent = "—"; sync();
+    toast("처음부터 다시 뽑습니다");
+  });
+  document.addEventListener("keydown", e => {
+    if (box.hidden) return;
+    if (e.key === "Escape") close();
+    else if (e.key === "Enter") draw();
+  });
+
+  /* 여는 법 ① 바닥의 "첫돌"을 2.5초 안에 다섯 번 */
+  const mark = $(".footer__mark");
+  if (mark) {
+    let hits = 0, since = 0;
+    mark.style.cursor = "default";
+    mark.addEventListener("click", () => {
+      const now = Date.now();
+      hits = now - since > 2500 ? 1 : hits + 1;
+      since = now;
+      if (hits >= 5) { hits = 0; open(); }
+    });
+  }
+  /* 여는 법 ② 주소 뒤에 ?draw */
+  if (new URLSearchParams(location.search).has("draw")) open();
 })();
 
 /* ── 지도 ── */
