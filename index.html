@@ -328,6 +328,8 @@ p { margin: 0; }
 
 /* ── 돌잡이 ── */
 .grabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+/* 마지막 줄에 한 칸만 남으면 가로로 채웁니다 */
+.grabs > :last-child:nth-child(3n + 1) { grid-column: 1 / -1; }
 .grab {
   appearance: none; cursor: pointer;
   display: grid; gap: 4px; place-items: center;
@@ -478,9 +480,11 @@ footer { padding: 40px 26px 56px; text-align: center; }
   <!-- ───── 돌잡이 ───── -->
   <section class="rise">
     <p class="eyebrow">돌잡이</p>
-    <h2>무엇을 잡을까요?</h2>
+    <h2>어떤 사람으로 자랄까요?</h2>
     <p style="font-size:var(--step--1);color:var(--ink-soft);margin-bottom:16px">
-      상 위에 놓인 여섯 가지 중 하나를 골라 주세요. 잔치 당일, 맞히신 분께 작은 선물을 드립니다.
+      돌상에 붓도 돈도 청진기도 올리지 않았습니다. 무엇이 될지보다, 어떤 마음을 품고 자랄지가
+      더 궁금했거든요. 옛 그리스 사람들이 신에게 하나씩 맡겨 두었던 열 가지 마음을 올렸습니다.
+      하나를 골라 주세요. 잔치 당일, 맞히신 분께 작은 선물을 드립니다.
     </p>
     <div class="grabs" id="grabs"></div>
     <p class="grab-result" id="grabResult">아직 고르지 않으셨어요.</p>
@@ -573,13 +577,20 @@ const CONFIG = {
   // 사진: 파일을 images/ 폴더에 넣고 경로를 적어 주세요. 첫 장이 대표 사진입니다.
   photos: ["images/1.jpg", "images/2.jpg", "images/3.jpg"],
 
+  // 직업이 아니라 "어떤 사람으로 자랐으면 하는지"를 고르는 돌잡이입니다.
+  // 각각의 마음을, 그리스 신화에서 그 마음을 맡았던 신에게 하나씩 빌려 왔습니다.
+  // 줄이고 싶으면 줄만 지우면 됩니다. 3의 배수(6개·9개)로 맞추면 칸이 딱 떨어져요.
   grabs: [
-    { item: "실",     hint: "장수",  say: "긴 실처럼 건강하고 오래오래 살겠네요." },
-    { item: "붓",     hint: "학문",  say: "책을 가까이하는 지혜로운 아이가 되겠어요." },
-    { item: "돈",     hint: "재물",  say: "부족함 없이 넉넉한 삶을 살겠네요." },
-    { item: "청진기", hint: "의사",  say: "아픈 곳을 살피는 따뜻한 손을 가졌네요." },
-    { item: "마이크", hint: "예술",  say: "사람들 앞에서 빛나는 재주를 타고났어요." },
-    { item: "공",     hint: "체육",  say: "튼튼한 몸으로 씩씩하게 자라겠어요." }
+    { item: "부엉이", hint: "아테나",       say: "지혜의 여신 아테나가 어깨에 얹고 다니던 부엉이예요. 어두울 때에도 멀리 보고 깊이 생각하는 사람이 되겠네요." },
+    { item: "사자",   hint: "헤라클레스",   say: "헤라클레스가 맨손으로 껴안았던 네메아의 사자예요. 두려운 순간에도 한 걸음 내딛는 용감한 사람이 되겠어요." },
+    { item: "별",     hint: "에오스",       say: "새벽의 여신 에오스가 아침마다 앞세우고 오던 샛별이에요. 긴 밤 끝에도 다시 밝아 오는, 희망을 잃지 않는 사람이 되겠네요." },
+    { item: "하트",   hint: "에로스",       say: "에로스의 화살이 닿은 자리예요. 다정한 마음으로 곁을 따뜻하게 만드는 사람이 되겠어요." },
+    { item: "거울",   hint: "알레테이아",   say: "진실의 여신 알레테이아가 손에 들고 있던 거울이에요. 자기 자신에게 부끄럽지 않은, 정직한 사람이 되겠네요." },
+    { item: "나침반", hint: "헤르메스",     say: "길 떠나는 이를 지켜 주던 헤르메스의 표식이에요. 낯선 길 앞에서도 설레며 나아가는 사람이 되겠어요." },
+    { item: "돋보기", hint: "프로메테우스", say: "이름부터 ‘먼저 내다본 자’였던 프로메테우스예요. 궁금한 것은 끝까지 들여다보는 사람이 되겠네요." },
+    { item: "씨앗",   hint: "데메테르",     say: "대지의 여신 데메테르가 건넨 밀알이에요. 서두르지 않고 매일 조금씩, 끝내 열매 맺는 사람이 되겠어요." },
+    { item: "리라",   hint: "아폴론",       say: "아폴론이 늘 안고 다니던 작은 현악기예요. 어디서든 저만의 가락을 지닌, 즐거운 사람이 되겠어요." },
+    { item: "실",     hint: "아리아드네",   say: "아리아드네가 미로 앞에서 건넨 실타래예요. 막막한 순간에도 실마리를 찾아내는 사람이 되겠네요." }
   ]
 };
 /* ══════════════════════════════════════════════════════
@@ -658,15 +669,15 @@ $("#notes").innerHTML = CONFIG.event.notes.map(n => `<li>${n}</li>`).join("");
   const pick = i => {
     $$(".grab", wrap).forEach(b => b.setAttribute("aria-pressed", b.dataset.i === String(i)));
     const g = CONFIG.grabs[i];
-    out.innerHTML = `<b>${g.item}</b>을(를) 고르셨어요. ${g.say}`;
-    try { localStorage.setItem("doljabi", i); } catch {}
+    out.innerHTML = `<b>${g.item}</b>${hasBatchim(g.item) ? "을" : "를"} 고르셨어요. ${g.say}`;
+    try { localStorage.setItem("doljabi.v2", i); } catch {}
   };
   wrap.addEventListener("click", e => {
     const b = e.target.closest(".grab");
     if (b) pick(+b.dataset.i);
   });
   try {
-    const saved = localStorage.getItem("doljabi");
+    const saved = localStorage.getItem("doljabi.v2");
     if (saved !== null && CONFIG.grabs[+saved]) pick(+saved);
   } catch {}
 })();
