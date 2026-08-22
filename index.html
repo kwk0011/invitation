@@ -610,13 +610,11 @@ const CONFIG = {
     { item: "말",     hint: "탐험",   say: "길이 없는 들판을 제일 먼저 달려 보는 동물이에요. 낯선 곳 앞에서도 설레며 나아가는 사람이 되겠네요." },
     { item: "거북이", hint: "꾸준함", say: "느려도 멈추지 않아 끝내 닿는 동물이에요. 서두르지 않고 매일 조금씩 해내는 사람이 되겠어요." }
   ]
+,
 
-  /* ═══════ B. 그리스 신 버전 ═══════
-     바꾸시려면 위 grabs 배열을 통째로 지우고 아래 여섯 줄을 그 자리에 붙여 넣으세요.
-     버튼(동물·뜻)은 A와 똑같고, 결과 문구만 그 뜻을 맡은 신의 이야기로 바뀝니다.
-     소품도 동물 여섯 그대로라 새로 살 것은 없습니다.
-
-  grabs: [
+  // B. 그리스 신 버전 — 주소 뒤에 ?v=greek 을 붙이면 이 문구로 바뀝니다.
+  // 버튼(동물·뜻)은 위와 똑같고 결과 문구만 달라집니다. 안 쓰기로 하면 이 배열만 지우세요.
+  grabsGreek: [
     { item: "부엉이", hint: "지혜",   say: "아테나는 싸움조차 지혜로 이긴 여신이었어요. 멀리 보고 깊이 생각하는 사람이 되겠네요." },
     { item: "사자",   hint: "용기",   say: "헤라클레스는 열두 가지 과업을 하나도 피하지 않았어요. 두려운 순간에 한 걸음 내딛는 사람이 되겠어요." },
     { item: "강아지", hint: "사랑",   say: "아프로디테는 신들조차 마음을 어쩌지 못하게 만든 사랑의 여신이에요. 다정한 마음으로 주위를 따뜻하게 만드는 사람이 되겠네요." },
@@ -624,7 +622,6 @@ const CONFIG = {
     { item: "말",     hint: "탐험",   say: "헤르메스는 길 떠나는 이를 지켜 주던 여행의 신이에요. 낯선 곳 앞에서도 설레며 나아가는 사람이 되겠네요." },
     { item: "거북이", hint: "꾸준함", say: "데메테르는 씨를 뿌리고 계절을 기다려 거두는 대지의 여신이에요. 서두르지 않고 매일 조금씩 해내는 사람이 되겠어요." }
   ]
-  ═══════════════════════════════ */
 };
 /* ══════════════════════════════════════════════════════
    ▲▲▲ 여기까지 ▲▲▲  아래는 손대지 않아도 됩니다
@@ -723,14 +720,20 @@ $("#notes").innerHTML = CONFIG.event.notes.map(n => `<li>${n}</li>`).join("");
 /* ── 돌잡이 ── */
 (() => {
   const wrap = $("#grabs"), out = $("#grabResult");
-  wrap.innerHTML = CONFIG.grabs.map((g, i) =>
+
+  /* ?v=greek 이면 그리스 신 버전 문구를 씁니다 */
+  const greek = /^(greek|b)$/i.test(new URLSearchParams(location.search).get("v") || "");
+  const items = (greek && (CONFIG.grabsGreek || []).length) ? CONFIG.grabsGreek : CONFIG.grabs;
+  if (greek) $(".grabs").closest("section").querySelector(".eyebrow").textContent = "돌잡이 · 신화 버전";
+
+  wrap.innerHTML = items.map((g, i) =>
     `<button class="grab" type="button" aria-pressed="false" data-i="${i}">
        <em>${g.item}</em><small>${g.hint}</small>
      </button>`).join("");
 
   const pick = i => {
     $$(".grab", wrap).forEach(b => b.setAttribute("aria-pressed", b.dataset.i === String(i)));
-    const g = CONFIG.grabs[i];
+    const g = items[i];
     out.innerHTML = `<b>${g.item}</b>${hasBatchim(g.item) ? "을" : "를"} 고르셨어요. ${g.say}`;
     try { localStorage.setItem("doljabi.v2", i); } catch {}
   };
@@ -740,7 +743,7 @@ $("#notes").innerHTML = CONFIG.event.notes.map(n => `<li>${n}</li>`).join("");
   });
   try {
     const saved = localStorage.getItem("doljabi.v2");
-    if (saved !== null && CONFIG.grabs[+saved]) pick(+saved);
+    if (saved !== null && items[+saved]) pick(+saved);
   } catch {}
 })();
 
