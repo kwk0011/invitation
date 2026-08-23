@@ -188,7 +188,7 @@ def build(venue_name, v, out):
     # 6 여섯 동물
     s = blank(prs)
     text(s, "돌 잡 이", Inches(0.55), Inches(0.5), 15, INK_FAINT, DISPLAY, spacing=4)
-    text(s, "여섯 가지 마음", Inches(1.1), Inches(0.9), 40, INK, DISPLAY)
+    text(s, "여섯 가지 성품", Inches(1.1), Inches(0.9), 40, INK, DISPLAY)
     cw, ch, gap = Inches(3.5), Inches(1.85), Inches(0.28)
     grid_w = cw * 3 + gap * 2
     x0 = W // 2 - grid_w // 2
