@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>루나 첫 생일 · 행운 쿠폰</title>
+<meta name="robots" content="noindex, nofollow" />
+<style>
+/* ═══════════════════════════════════════════
+   초대장과 같은 아이보리 · 먹빛 · 낙관 홍색
+   ═══════════════════════════════════════════ */
+:root {
+  --paper:    #FCF8F1;
+  --paper-2:  #F4EDE1;
+  --ink:      #332E2A;
+  --ink-soft: #6B6155;
+  --ink-faint:#8A7F70;
+  --line:     #E2D8C8;
+  --seal:     #B93A50;
+  --seal-ink: #FFF6F2;
+  --font-display: "Nanum Myeongjo", AppleMyungjo, "Noto Serif KR", Batang, 바탕, Georgia, serif;
+  --font-body: Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; padding: 24px 16px 60px;
+  background: #E8E2D8;
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+p { margin: 0; }
+
+/* ── 화면에서만 보이는 안내 ── */
+.bar {
+  max-width: 210mm; margin: 0 auto 20px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+  padding: 16px 18px;
+  background: var(--paper); border-radius: 4px;
+  font-size: .875rem; color: var(--ink-soft); line-height: 1.7;
+}
+.bar b { color: var(--ink); font-weight: 600; }
+.bar__btn {
+  appearance: none; cursor: pointer;
+  margin-left: auto;
+  padding: 10px 22px; border-radius: 999px;
+  border: 1px solid var(--seal); background: var(--seal); color: var(--seal-ink);
+  font-family: var(--font-body); font-size: .875rem; letter-spacing: .04em;
+}
+.bar__btn:active { transform: scale(.97); }
+
+/* ── A4 한 장 ── */
+.sheet {
+  width: 210mm; min-height: 297mm;
+  margin: 0 auto;
+  padding: 12mm;
+  background: var(--paper);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 1fr;
+  gap: 0;
+}
+
+/* ── 쿠폰 한 칸 ── */
+.coupon {
+  position: relative;
+  padding: 12mm 9mm;
+  display: grid; align-content: center; justify-items: center;
+  gap: 3.2mm;
+  text-align: center;
+  /* 자르는 선 */
+  border-right: 1px dashed var(--line);
+  border-bottom: 1px dashed var(--line);
+}
+.coupon:nth-child(2n) { border-right: 0; }
+.coupon:nth-last-child(-n + 2) { border-bottom: 0; }
+
+.coupon__eyebrow {
+  font-family: var(--font-display);
+  font-size: 8.5pt; letter-spacing: .34em;
+  color: var(--ink-faint);
+}
+.coupon__seal {
+  width: 15mm; height: 15mm;
+  display: grid; place-content: center;
+  background: var(--seal); color: var(--seal-ink);
+  border-radius: 2px;
+  transform: rotate(-7deg);
+  font-family: var(--font-display);
+  font-size: 12pt; line-height: 1.15; letter-spacing: .04em;
+  margin-bottom: 1mm;
+}
+.coupon__seal small { display: block; font-size: 4.6pt; letter-spacing: .2em; opacity: .85; }
+.coupon__title {
+  font-family: var(--font-display);
+  font-size: 19pt; letter-spacing: .1em;
+  color: var(--ink); line-height: 1.2;
+}
+.coupon__rule { width: 1px; height: 7mm; background: var(--line); }
+.coupon__msg {
+  font-family: var(--font-display);
+  font-size: 10pt; line-height: 1.95; color: var(--ink-soft);
+}
+.coupon__foot {
+  margin-top: 1.5mm;
+  font-size: 7.5pt; letter-spacing: .06em; color: var(--ink-faint);
+}
+.coupon__band {
+  display: flex; gap: 2px; margin-top: 1mm;
+}
+.coupon__band i { width: 9mm; height: 2px; border-radius: 2px; }
+.coupon__band i:nth-child(1) { background: #D9707F; }
+.coupon__band i:nth-child(2) { background: #E8B36B; }
+.coupon__band i:nth-child(3) { background: #8FB98A; }
+.coupon__band i:nth-child(4) { background: #7FA3C4; }
+.coupon__band i:nth-child(5) { background: #A98BB8; }
+
+/* ── 인쇄 ── */
+@page { size: A4 portrait; margin: 0; }
+@media print {
+  body { padding: 0; background: #fff; }
+  .bar { display: none; }
+  .sheet {
+    width: auto; min-height: auto;
+    height: 297mm; margin: 0;
+    box-shadow: none;
+    break-inside: avoid;
+  }
+  .coupon { break-inside: avoid; }
+}
+@media screen {
+  .sheet { box-shadow: 0 10px 40px -18px rgba(0,0,0,.4); }
+}
+
+/* 화면이 좁을 때 미리보기가 잘리지 않도록 */
+@media screen and (max-width: 230mm) {
+  body { padding: 16px 0 48px; }
+  .bar { max-width: none; margin: 0 12px 16px; }
+  .sheet { transform-origin: top center; }
+}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <p>
+    <b>A4 한 장에 여덟 장</b>입니다. 오른쪽 버튼으로 인쇄하시고, 점선을 따라 자르세요.<br />
+    인쇄 설정에서 <b>배율 100%</b>, <b>배경 그래픽 켜기</b>를 확인해 주세요. 배경이 꺼져 있으면 낙관과 색동 띠가 안 나옵니다.
+  </p>
+  <button class="bar__btn" type="button" onclick="window.print()">인쇄하기</button>
+</div>
+
+<div class="sheet" id="sheet"></div>
+
+<script>
+/* ══════════════════════════════════════════════════════
+   ▼▼▼ 여기만 고치면 됩니다 ▼▼▼
+   ══════════════════════════════════════════════════════ */
+const COUPON = {
+  eyebrow: "루나의 첫 번째 생일",
+  title:   "행운상",
+  msg:     "오늘의 행운을<br />잡으셨습니다",
+  foot:    "선물은 며칠 안에 따로 전해 드립니다",
+  perPage: 8            // 한 장에 몇 칸 (2의 배수로)
+};
+/* ══════════════════════════════════════════════════════
+   ▲▲▲ 여기까지 ▲▲▲
+   ══════════════════════════════════════════════════════ */
+
+document.getElementById("sheet").innerHTML = Array.from({ length: COUPON.perPage }, () => `
+  <div class="coupon">
+    <p class="coupon__eyebrow">${COUPON.eyebrow}</p>
+    <div class="coupon__seal">돌<small>첫돌</small></div>
+    <p class="coupon__title">${COUPON.title}</p>
+    <div class="coupon__rule"></div>
+    <p class="coupon__msg">${COUPON.msg}</p>
+    <div class="coupon__band"><i></i><i></i><i></i><i></i><i></i></div>
+    <p class="coupon__foot">${COUPON.foot}</p>
+  </div>`).join("");
+</script>
+
+</body>
+</html>
