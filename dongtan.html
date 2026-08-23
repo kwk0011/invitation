@@ -455,6 +455,13 @@ p { margin: 0; }
 
 /* ── 오시는 길 ── */
 .place { font-family: var(--font-display); font-size: var(--step-1); line-height: 1.6; }
+/* 잔치와 식사 장소가 나뉠 때 */
+.venue-label {
+  font-family: var(--font-display); font-size: var(--step--1);
+  letter-spacing: .3em; color: var(--seal); margin: 0 0 10px;
+}
+.venue2 { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--line); }
+.venue-when { font-size: var(--step--1); color: var(--ink-soft); margin: 0 0 10px; }
 .place span { display: block; font-family: var(--font-body); font-size: var(--step--1); color: var(--ink-soft); margin-top: 6px; }
 .btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
 .btn {
@@ -600,6 +607,7 @@ footer { padding: 40px 26px 56px; text-align: center; }
       <a class="btn" id="kakao" href="#" target="_blank" rel="noopener">카카오맵</a>
       <button class="btn" type="button" data-copy-addr>주소 복사</button>
     </div>
+    <div id="mealBlock"></div>
     <ul class="notes" id="notes"></ul>
     <div class="btns" id="contacts" style="margin-top:22px"></div>
   </section>
@@ -680,6 +688,15 @@ const CONFIG = {
     placeName: "루나네 집",
     address: "경기도 화성시 동탄숲속로 69, 836동 1801호",   // 화면에 표시되는 주소
     mapQuery: "화성시 동탄숲속로 69",                       // 지도 앱에서 검색할 말 (동·호수는 빼야 검색됩니다)
+
+    // 잔치는 집에서 하고, 식사는 자리를 옮겨서 합니다
+    meal: {
+      whenText: "같은 날 오후 1시",
+      placeName: "긴자 신영통점",
+      address: "경기 수원시 영통구 봉영로 1377",
+      mapQuery: "수원시 영통구 봉영로 1377"
+    },
+
     notes: [
       // 주차 방법, 공동현관 비밀번호 같은 안내를 여기에 적으세요.
       // 예) "지하 주차장으로 오시면 836동과 바로 이어집니다."
@@ -1039,6 +1056,34 @@ $("#notes").innerHTML = CONFIG.event.notes.map(n => `<li>${n}</li>`).join("");
   }
 })();
 
+/* ── 식사 장소 (따로 있을 때만 나옵니다) ── */
+(() => {
+  const m = CONFIG.event.meal, box = $("#mealBlock");
+  if (!box || !m || !m.placeName) return;
+
+  const NAME_CSS = "font-family:var(--font-display);font-size:var(--step-1);color:var(--ink);display:block;margin:0";
+  const q = encodeURIComponent((m.mapQuery || m.address || m.placeName).trim());
+
+  box.innerHTML = `
+    <div class="venue2">
+      <p class="venue-label">식사</p>
+      ${m.whenText ? `<p class="venue-when">${m.whenText}</p>` : ""}
+      <p class="place">
+        <span style="${NAME_CSS}">${m.placeName}</span>
+        ${m.address ? `<span>${m.address}</span>` : ""}
+      </p>
+      <div class="btns">
+        <a class="btn" href="https://map.naver.com/p/search/${q}" target="_blank" rel="noopener">네이버 지도</a>
+        <a class="btn" href="https://map.kakao.com/link/search/${q}" target="_blank" rel="noopener">카카오맵</a>
+        ${m.address ? `<button class="btn" type="button" data-copy-meal>주소 복사</button>` : ""}
+      </div>
+    </div>`;
+
+  /* 장소가 둘이 되었으니 위쪽에도 무엇을 하는 자리인지 붙여 줍니다 */
+  const first = $(".place");
+  if (first) first.insertAdjacentHTML("beforebegin", `<p class="venue-label">잔치</p>`);
+})();
+
 /* ── 연락처 (없으면 영역 자체를 숨김) ── */
 if (CONFIG.contacts.length) {
   $("#contacts").innerHTML = CONFIG.contacts.map(c =>
@@ -1071,6 +1116,7 @@ async function copy(text, done) {
 
 document.addEventListener("click", e => {
   if (e.target.closest("[data-copy-addr]")) copy(CONFIG.event.address, "주소를 복사했어요");
+  if (e.target.closest("[data-copy-meal]")) copy(CONFIG.event.meal.address, "식사 장소 주소를 복사했어요");
 });
 
 $("#copyLink").addEventListener("click", () => copy(location.href, "링크를 복사했어요"));
