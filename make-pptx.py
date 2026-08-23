@@ -254,11 +254,8 @@ def build(venue_name, v, out):
     # 11 사진
     s = blank(prs)
     text(s, "사 진", Inches(1.0), Inches(0.5), 15, INK_FAINT, DISPLAY, spacing=4)
-    text(s, "다 같이\n사진 찍겠습니다", Inches(1.6), Inches(2.2), 50, INK, DISPLAY, line=1.3)
-    rule(s, Inches(4.1))
-    text(s, "다 같이  →  친가  →  외가  →  친구",
-         Inches(4.75), Inches(0.8), 26, INK_SOFT, DISPLAY)
-    text(s, "부르면 앞으로 나와 주세요", Inches(5.9), Inches(0.6), 20, SEAL, DISPLAY)
+    text(s, "다 같이\n사진 찍겠습니다", Inches(2.2), Inches(2.4), 52, INK, DISPLAY, line=1.3)
+    band(s, Inches(5.4))
 
     # 12 감사
     s = blank(prs)
