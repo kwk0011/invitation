@@ -226,13 +226,22 @@ def build(venue_name, v, out):
     text(s, "루나가 잡은 것은", Inches(2.6), Inches(1.5), 56, INK, DISPLAY)
     band(s, Inches(5.2))
 
-    # 8 노래
+    # 8 맞히신 분
+    s = blank(prs)
+    text(s, "돌 잡 이", Inches(0.95), Inches(0.5), 15, INK_FAINT, DISPLAY, spacing=4)
+    text(s, "맞히신 분\n계신가요?", Inches(1.5), Inches(2.2), 50, INK, DISPLAY, line=1.3)
+    rule(s, Inches(4.0))
+    text(s, "초대장을 다시 열어 보시면\n고르셨던 동물이 그대로 남아 있습니다",
+         Inches(4.6), Inches(1.5), 24, INK_SOFT, DISPLAY, line=1.8)
+    text(s, "화면을 보여 주세요", Inches(6.3), Inches(0.5), 15, INK_FAINT, BODY)
+
+    # 9 노래
     s = blank(prs)
     text(s, "축 하  노 래", Inches(0.9), Inches(0.5), 15, INK_FAINT, DISPLAY, spacing=4)
     text(s, "생일 축하합니다\n생일 축하합니다\n사랑하는 우리 루나\n생일 축하합니다",
          Inches(1.8), Inches(4.6), 40, INK, DISPLAY, line=1.75)
 
-    # 9 숫자 뽑기
+    # 10 숫자 뽑기
     s = blank(prs)
     text(s, "행 운 의  숫 자", Inches(0.95), Inches(0.5), 15, INK_FAINT, DISPLAY, spacing=4)
     text(s, "번호를 뽑아 주세요", Inches(1.6), Inches(1.2), 48, INK, DISPLAY)
@@ -241,14 +250,14 @@ def build(venue_name, v, out):
          Inches(3.8), Inches(1.6), 25, INK_SOFT, DISPLAY, line=1.8)
     text(s, "kwk0011.github.io/invitation", Inches(5.75), Inches(0.5), 15, INK_FAINT, BODY)
 
-    # 10 감사
+    # 11 감사
     s = blank(prs)
     text(s, "고 맙 습 니 다", Inches(1.0), Inches(0.5), 15, INK_FAINT, DISPLAY, spacing=4)
     text(s, "덕분에\n한 해를 잘 지냈습니다", Inches(1.7), Inches(2.4), 48, INK, DISPLAY, line=1.35)
     rule(s, Inches(4.6))
     text(s, "오래 기억할 하루가 되겠습니다", Inches(5.2), Inches(0.7), 25, INK_SOFT, DISPLAY)
 
-    # 11 식사
+    # 12 식사
     s = blank(prs)
     text(s, "식 사", Inches(1.1), Inches(0.5), 15, INK_FAINT, DISPLAY, spacing=4)
     text(s, v["meal_title"], Inches(1.8), Inches(1.2), 48, INK, DISPLAY)

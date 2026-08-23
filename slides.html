@@ -140,7 +140,7 @@ body:hover .hud, body.show-hud .hud { opacity: 1; }
 <div class="deck" id="deck"></div>
 
 <div class="hud">
-  <span class="hud__n" id="hudN">1 / 11</span>
+  <span class="hud__n" id="hudN">1 / 12</span>
   <span class="hud__bar"><i id="hudBar"></i></span>
   <span class="hud__help">← → 넘기기 · F 전체화면</span>
 </div>
@@ -233,24 +233,31 @@ const SLIDES = [
     <h2 class="title">루나가 잡은 것은</h2>
     <div class="band"><i></i><i></i><i></i><i></i><i></i></div>`,
 
-  /* 8 노래 */ `
+  /* 8 맞히신 분 */ `
+    <p class="eyebrow">돌잡이</p>
+    <h2 class="title">맞히신 분<br />계신가요?</h2>
+    <div class="rule"></div>
+    <p class="lead">초대장을 다시 열어 보시면<br />고르셨던 동물이 그대로 남아 있습니다</p>
+    <p class="small">화면을 보여 주세요</p>`,
+
+  /* 9 노래 */ `
     <p class="eyebrow">축하 노래</p>
     <p class="lyrics">생일 축하합니다<br />생일 축하합니다<br />사랑하는 우리 루나<br />생일 축하합니다</p>`,
 
-  /* 9 숫자 뽑기 */ `
+  /* 10 숫자 뽑기 */ `
     <p class="eyebrow">행운의 숫자</p>
     <h2 class="title">번호를 뽑아 주세요</h2>
     <div class="rule"></div>
     <p class="lead">가장 작은 수와 가장 큰 수를 뽑으신 분께<br />작은 선물을 드립니다</p>
     <p class="small">${DRAW_URL}</p>`,
 
-  /* 10 감사 */ `
+  /* 11 감사 */ `
     <p class="eyebrow">고맙습니다</p>
     <h2 class="title">덕분에<br />한 해를 잘 지냈습니다</h2>
     <div class="rule"></div>
     <p class="lead">오래 기억할 하루가 되겠습니다</p>`,
 
-  /* 11 식사 */ `
+  /* 12 식사 */ `
     <p class="eyebrow">식사</p>
     <h2 class="title">${v.mealTitle}</h2>
     <div class="rule"></div>
