@@ -38,7 +38,7 @@ BODY = "맑은 고딕"
 W, H = Inches(13.333), Inches(7.5)   # 16:9
 
 # 지나온 열두 달 영상. 파일이 없으면 안내 문구만 들어갑니다.
-FILM = Path("video/diary_38s.mp4")
+FILM = Path("video/diary_39s.mp4")
 POSTER = Path("images/m-00.jpg")      # 재생 전에 보일 그림
 
 BABY_FACTS = [
