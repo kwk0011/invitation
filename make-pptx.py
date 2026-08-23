@@ -248,7 +248,8 @@ def build(venue_name, v, out):
     rule(s, Inches(3.15))
     text(s, "가장 작은 수와 가장 큰 수를 뽑으신 분께\n작은 선물을 드립니다",
          Inches(3.8), Inches(1.6), 25, INK_SOFT, DISPLAY, line=1.8)
-    text(s, "kwk0011.github.io/invitation", Inches(5.75), Inches(0.5), 15, INK_FAINT, BODY)
+    text(s, "초대장 맨 아래 ‘첫돌’ 글자를 세 번 누르세요",
+         Inches(5.7), Inches(0.6), 20, SEAL, DISPLAY)
 
     # 11 감사
     s = blank(prs)
