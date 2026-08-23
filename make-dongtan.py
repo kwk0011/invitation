@@ -60,6 +60,16 @@ EVENT_NEW = '''    placeName: "루나네 집",
       // 예) "지하 주차장으로 오시면 836동과 바로 이어집니다."
     ]'''
 
+# ── 마크업과 meta 태그에 그대로 박혀 있는 강릉 문구 ──
+# CONFIG 값은 위에서 바꾸지만, 화면에 미리 적혀 있는 글자와
+# <meta name="description">는 따로 손봐야 합니다.
+# (자바스크립트가 뜨기 전에 잠깐 강릉이 보이는 것을 막습니다)
+LEFTOVERS = [
+    ("2026년 9월 24일 목요일 오후 5시 30분", "2026년 9월 12일 토요일 오전 11시"),
+    ("씨마크 호텔 1층 더 레스토랑", "루나네 집"),
+    ("강원특별자치도 강릉시 해안로406번길 2", "경기도 화성시 동탄숲속로 69, 836동 1801호"),
+]
+
 BANNER = """<!-- 이 파일은 make-dongtan.py 가 index.html 에서 만들어 냅니다.
      여기를 직접 고치면 다음에 스크립트를 돌릴 때 지워집니다.
      내용을 바꾸려면 index.html 을, 장소를 바꾸려면 make-dongtan.py 를 고치세요. -->
@@ -78,6 +88,14 @@ def main() -> int:
             print("index.html 의 해당 부분이 바뀌었다면 이 스크립트의 문자열도 맞춰 주세요.")
             return 1
         html = html.replace(old, new)
+
+    for old, new in LEFTOVERS:
+        html = html.replace(old, new)
+
+    for word in ("씨마크", "강릉", "9월 24일"):
+        if word in html:
+            print(f"실패: {DST} 에 '{word}' 가 남았습니다. LEFTOVERS 를 보완해 주세요.")
+            return 1
 
     # <!doctype html> 바로 다음 줄에 안내 문구를 끼웁니다
     line_end = html.index("\n") + 1
