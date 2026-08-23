@@ -251,14 +251,23 @@ def build(venue_name, v, out):
     text(s, "초대장 맨 아래 ‘첫돌’ 글자를 세 번 누르세요",
          Inches(5.7), Inches(0.6), 20, SEAL, DISPLAY)
 
-    # 11 감사
+    # 11 사진
+    s = blank(prs)
+    text(s, "사 진", Inches(1.0), Inches(0.5), 15, INK_FAINT, DISPLAY, spacing=4)
+    text(s, "다 같이\n사진 찍겠습니다", Inches(1.6), Inches(2.2), 50, INK, DISPLAY, line=1.3)
+    rule(s, Inches(4.1))
+    text(s, "다 같이  →  친가  →  외가  →  친구",
+         Inches(4.75), Inches(0.8), 26, INK_SOFT, DISPLAY)
+    text(s, "부르면 앞으로 나와 주세요", Inches(5.9), Inches(0.6), 20, SEAL, DISPLAY)
+
+    # 12 감사
     s = blank(prs)
     text(s, "고 맙 습 니 다", Inches(1.0), Inches(0.5), 15, INK_FAINT, DISPLAY, spacing=4)
     text(s, "덕분에\n한 해를 잘 지냈습니다", Inches(1.7), Inches(2.4), 48, INK, DISPLAY, line=1.35)
     rule(s, Inches(4.6))
     text(s, "오래 기억할 하루가 되겠습니다", Inches(5.2), Inches(0.7), 25, INK_SOFT, DISPLAY)
 
-    # 12 식사
+    # 13 식사
     s = blank(prs)
     text(s, "식 사", Inches(1.1), Inches(0.5), 15, INK_FAINT, DISPLAY, spacing=4)
     text(s, v["meal_title"], Inches(1.8), Inches(1.2), 48, INK, DISPLAY)
