@@ -2,8 +2,8 @@
 """index.html 에서 장소만 바꾼 dongtan.html 을 만듭니다.
 
 돌잔치를 두 번 나눠 하기 때문에 초대장도 두 벌입니다.
-  index.html    그룹 1 · 강릉 씨마크 호텔
-  dongtan.html  그룹 2 · 화성 동탄 자택
+  index.html    그룹 1 · 9월 24일(목) 17:30 · 강릉 씨마크 호텔
+  dongtan.html  그룹 2 · 9월 12일(토) 11:00 · 화성 동탄 자택
 
 사진, 돌잡이, 인사말 같은 나머지 내용은 전부 같습니다.
 index.html 을 고친 뒤 이 스크립트를 다시 돌리면 그대로 옮겨집니다.
@@ -18,7 +18,14 @@ DST = "dongtan.html"
 
 # ── 카톡 미리보기 문구 (서버가 읽는 태그라 파일마다 따로 있어야 합니다) ──
 OG_OLD = '<meta property="og:description" content="2026년 9월 24일 목요일 오후 5시 30분 · 씨마크 호텔 1층 더 레스토랑" />'
-OG_NEW = '<meta property="og:description" content="2026년 9월 24일 목요일 오후 5시 30분 · 화성 동탄 루나네 집" />'
+OG_NEW = '<meta property="og:description" content="2026년 9월 12일 토요일 오전 11시 · 화성 동탄 루나네 집" />'
+
+# ── 날짜와 시간 (강릉과 다른 날에 따로 엽니다) ──
+WHEN_OLD = """    at: "2026-09-24T17:30",                       // 잔치 일시 (D-day 계산용)
+    whenText: "2026년 9월 24일 목요일 오후 5시 30분","""
+
+WHEN_NEW = """    at: "2026-09-12T11:00",                       // 잔치 일시 (D-day 계산용)
+    whenText: "2026년 9월 12일 토요일 오전 11시","""
 
 # ── 장소 설정 ──
 EVENT_OLD = '''    placeName: "씨마크 호텔 1층 더 레스토랑",
@@ -48,6 +55,7 @@ def main() -> int:
     html = io.open(SRC, encoding="utf-8").read()
 
     for old, new, what in ((OG_OLD, OG_NEW, "카톡 미리보기 문구"),
+                           (WHEN_OLD, WHEN_NEW, "날짜와 시간"),
                            (EVENT_OLD, EVENT_NEW, "장소 설정")):
         found = html.count(old)
         if found != 1:
