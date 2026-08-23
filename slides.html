@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>루나 첫 생일 · 상영 슬라이드</title>
+<meta name="robots" content="noindex, nofollow" />
+<style>
+:root {
+  --paper:    #FCF8F1;
+  --paper-2:  #F4EDE1;
+  --ink:      #332E2A;
+  --ink-soft: #6B6155;
+  --ink-faint:#8A7F70;
+  --line:     #E2D8C8;
+  --seal:     #B93A50;
+  --seal-ink: #FFF6F2;
+  --font-display: "Nanum Myeongjo", AppleMyungjo, "Noto Serif KR", Batang, 바탕, Georgia, serif;
+  --font-body: Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+  /* 화면 크기에 따라 글자가 같이 커지도록 */
+  --u: clamp(10px, 1.35vw, 22px);
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  background: var(--paper); color: var(--ink);
+  font-family: var(--font-body);
+  overflow: hidden;
+  cursor: default;
+}
+p, h1, h2 { margin: 0; }
+
+/* ── 슬라이드 ── */
+.deck { position: relative; width: 100%; height: 100%; }
+.slide {
+  position: absolute; inset: 0;
+  display: grid; place-content: center; justify-items: center;
+  gap: calc(var(--u) * .9);
+  padding: calc(var(--u) * 3);
+  text-align: center;
+  opacity: 0; visibility: hidden;
+  transition: opacity .5s ease;
+}
+.slide.is-on { opacity: 1; visibility: visible; }
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: calc(var(--u) * 1.15);
+  letter-spacing: .4em; color: var(--ink-faint);
+}
+.title {
+  font-family: var(--font-display);
+  font-size: calc(var(--u) * 4.2);
+  letter-spacing: .06em; line-height: 1.25; font-weight: 400;
+}
+.lead {
+  font-family: var(--font-display);
+  font-size: calc(var(--u) * 1.9);
+  line-height: 2; color: var(--ink-soft);
+}
+.small { font-size: calc(var(--u) * 1.2); color: var(--ink-faint); letter-spacing: .06em; }
+.rule { width: 1px; height: calc(var(--u) * 2.6); background: var(--line); }
+
+.seal {
+  width: calc(var(--u) * 4.6); height: calc(var(--u) * 4.6);
+  display: grid; place-content: center;
+  background: var(--seal); color: var(--seal-ink);
+  border-radius: 4px; transform: rotate(-7deg);
+  font-family: var(--font-display);
+  font-size: calc(var(--u) * 1.7); line-height: 1.1;
+}
+.seal small { display: block; font-size: calc(var(--u) * .58); letter-spacing: .2em; opacity: .85; }
+
+.band { display: flex; gap: 3px; }
+.band i { width: calc(var(--u) * 2.6); height: 3px; border-radius: 3px; }
+.band i:nth-child(1) { background: #D9707F; }
+.band i:nth-child(2) { background: #E8B36B; }
+.band i:nth-child(3) { background: #8FB98A; }
+.band i:nth-child(4) { background: #7FA3C4; }
+.band i:nth-child(5) { background: #A98BB8; }
+
+/* 루나는요 */
+.facts { display: grid; gap: calc(var(--u) * 1.1); margin-top: calc(var(--u) * .6); }
+.facts div { display: grid; grid-template-columns: auto auto; gap: calc(var(--u) * 1.6); align-items: baseline; }
+.facts dt { font-size: calc(var(--u) * 1.2); letter-spacing: .2em; color: var(--ink-faint); text-align: right; }
+.facts dd {
+  margin: 0; font-family: var(--font-display);
+  font-size: calc(var(--u) * 2); color: var(--ink); text-align: left;
+}
+
+/* 돌잡이 여섯 */
+.six { display: grid; grid-template-columns: repeat(3, 1fr); gap: calc(var(--u) * 1.2); margin-top: calc(var(--u) * 1.2); }
+.six > div {
+  padding: calc(var(--u) * 1.5) calc(var(--u) * 1.2);
+  border: 1px solid var(--line); border-radius: 4px;
+  background: var(--paper-2);
+  display: grid; gap: calc(var(--u) * .35);
+}
+.six b {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: calc(var(--u) * 2.3); color: var(--ink);
+}
+.six span { font-size: calc(var(--u) * 1.1); letter-spacing: .18em; color: var(--seal); }
+
+/* 노래 가사 */
+.lyrics {
+  font-family: var(--font-display);
+  font-size: calc(var(--u) * 3);
+  line-height: 1.9; color: var(--ink);
+}
+
+/* 영상 자리 */
+.cue {
+  margin-top: calc(var(--u) * 1.4);
+  padding: calc(var(--u) * .8) calc(var(--u) * 1.8);
+  border: 1px dashed var(--line); border-radius: 999px;
+  font-size: calc(var(--u) * 1.05); letter-spacing: .12em; color: var(--ink-faint);
+}
+
+/* ── 아래쪽 진행 표시 ── */
+.hud {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  padding: calc(var(--u) * 1.1) calc(var(--u) * 1.6);
+  display: flex; align-items: center; gap: calc(var(--u) * 1);
+  font-size: calc(var(--u) * .95); color: var(--ink-faint);
+  opacity: 0; transition: opacity .3s;
+}
+body:hover .hud, body.show-hud .hud { opacity: 1; }
+.hud__bar { flex: 1; height: 2px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.hud__bar i { display: block; height: 100%; background: var(--seal); transform-origin: left; transition: transform .35s ease; }
+.hud__n { font-variant-numeric: tabular-nums; letter-spacing: .1em; }
+.hud__help { letter-spacing: .06em; }
+
+@media print { body { overflow: visible; } .slide { position: static; opacity: 1; visibility: visible; page-break-after: always; height: 100vh; } .hud { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck"></div>
+
+<div class="hud">
+  <span class="hud__n" id="hudN">1 / 11</span>
+  <span class="hud__bar"><i id="hudBar"></i></span>
+  <span class="hud__help">← → 넘기기 · F 전체화면</span>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════
+   ▼▼▼ 여기만 고치면 됩니다 ▼▼▼
+   주소 뒤에 ?v=gn 을 붙이면 강릉용으로 바뀝니다 (기본은 동탄)
+   ══════════════════════════════════════════════════════ */
+const BABY = {
+  name: "김루나",
+  facts: [
+    ["태어난 날", "2025년 9월 22일"],
+    ["좋아하는 것", "산책, 딸기, 아빠 안경"],
+    ["요즘 하는 말", "엄마, 압빠, 맘마"]
+  ]
+};
+
+const VENUE = {
+  dt: {   // 동탄
+    when: "2026년 9월 12일 토요일",
+    place: "루나네 집",
+    mealTitle: "이제 식사하러 갑니다",
+    mealLines: ["오후 1시 · 긴자 신영통점", "경기 수원시 영통구 봉영로 1377"]
+  },
+  gn: {   // 강릉
+    when: "2026년 9월 24일 목요일",
+    place: "씨마크 호텔 더 레스토랑",
+    mealTitle: "이제 식사를 시작합니다",
+    mealLines: ["편히 앉으셔서 맛있게 드세요"]
+  }
+};
+
+const GRABS = [
+  ["호랑이", "용기"], ["코끼리", "지혜"], ["강아지", "사랑"],
+  ["나비", "희망"], ["말", "탐험"], ["거북이", "꾸준함"]
+];
+
+const DRAW_URL = "kwk0011.github.io/invitation";
+/* ══════════════════════════════════════════════════════
+   ▲▲▲ 여기까지 ▲▲▲
+   ══════════════════════════════════════════════════════ */
+
+const $ = s => document.querySelector(s);
+const v = VENUE[new URLSearchParams(location.search).get("v") === "gn" ? "gn" : "dt"];
+
+const SLIDES = [
+  /* 1 표지 */ `
+    <div class="seal">돌<small>첫돌</small></div>
+    <p class="eyebrow">초대합니다</p>
+    <h1 class="title">${BABY.name}</h1>
+    <div class="rule"></div>
+    <p class="lead">첫 번째 생일</p>
+    <p class="small">${v.when} · ${v.place}</p>`,
+
+  /* 2 환영 */ `
+    <p class="eyebrow">환영합니다</p>
+    <h2 class="title">와 주셔서<br />고맙습니다</h2>
+    <div class="band"><i></i><i></i><i></i><i></i><i></i></div>`,
+
+  /* 3 루나는요 */ `
+    <p class="eyebrow">우리 아이</p>
+    <h2 class="title">루나는요</h2>
+    <dl class="facts">
+      ${BABY.facts.map(([k, val]) => `<div><dt>${k}</dt><dd>${val}</dd></div>`).join("")}
+    </dl>`,
+
+  /* 4 영상 */ `
+    <p class="eyebrow">사진</p>
+    <h2 class="title">지나온 열두 달</h2>
+    <div class="rule"></div>
+    <p class="lead">작은 손으로 세상을 처음 만나던 날부터<br />오늘까지</p>
+    <p class="cue">여기서 영상을 틀어 주세요</p>`,
+
+  /* 5 돌잡이 열기 */ `
+    <p class="eyebrow">돌잡이</p>
+    <h2 class="title">어떤 사람으로<br />자랄까요?</h2>
+    <div class="rule"></div>
+    <p class="lead">무엇이 될지보다<br />어떤 마음으로 자랄지가 궁금했습니다</p>`,
+
+  /* 6 여섯 동물 */ `
+    <p class="eyebrow">돌잡이</p>
+    <h2 class="title">여섯 가지 마음</h2>
+    <div class="six">
+      ${GRABS.map(([a, m]) => `<div><b>${a}</b><span>${m}</span></div>`).join("")}
+    </div>`,
+
+  /* 7 결과 */ `
+    <p class="eyebrow">돌잡이</p>
+    <h2 class="title">루나가 잡은 것은</h2>
+    <div class="band"><i></i><i></i><i></i><i></i><i></i></div>`,
+
+  /* 8 노래 */ `
+    <p class="eyebrow">축하 노래</p>
+    <p class="lyrics">생일 축하합니다<br />생일 축하합니다<br />사랑하는 우리 루나<br />생일 축하합니다</p>`,
+
+  /* 9 숫자 뽑기 */ `
+    <p class="eyebrow">행운의 숫자</p>
+    <h2 class="title">번호를 뽑아 주세요</h2>
+    <div class="rule"></div>
+    <p class="lead">가장 작은 수와 가장 큰 수를 뽑으신 분께<br />작은 선물을 드립니다</p>
+    <p class="small">${DRAW_URL}</p>`,
+
+  /* 10 감사 */ `
+    <p class="eyebrow">고맙습니다</p>
+    <h2 class="title">덕분에<br />한 해를 잘 지냈습니다</h2>
+    <div class="rule"></div>
+    <p class="lead">오래 기억할 하루가 되겠습니다</p>`,
+
+  /* 11 식사 */ `
+    <p class="eyebrow">식사</p>
+    <h2 class="title">${v.mealTitle}</h2>
+    <div class="rule"></div>
+    ${v.mealLines.map(l => `<p class="lead">${l}</p>`).join("")}
+    <div class="band"><i></i><i></i><i></i><i></i><i></i></div>`
+];
+
+/* ── 그리기 ── */
+const deck = $("#deck");
+deck.innerHTML = SLIDES.map((html, i) => `<section class="slide${i ? "" : " is-on"}">${html}</section>`).join("");
+const slides = [...document.querySelectorAll(".slide")];
+
+let at = 0;
+const show = i => {
+  at = Math.max(0, Math.min(slides.length - 1, i));
+  slides.forEach((s, n) => s.classList.toggle("is-on", n === at));
+  $("#hudN").textContent = `${at + 1} / ${slides.length}`;
+  $("#hudBar").style.transform = `scaleX(${(at + 1) / slides.length})`;
+  history.replaceState(null, "", `#${at + 1}`);
+};
+
+document.addEventListener("keydown", e => {
+  if (["ArrowRight", "ArrowDown", " ", "PageDown", "Enter"].includes(e.key)) { e.preventDefault(); show(at + 1); }
+  else if (["ArrowLeft", "ArrowUp", "PageUp", "Backspace"].includes(e.key)) { e.preventDefault(); show(at - 1); }
+  else if (e.key === "Home") show(0);
+  else if (e.key === "End") show(slides.length - 1);
+  else if (e.key === "f" || e.key === "F") {
+    document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen?.();
+  }
+});
+
+/* 화면을 누르면 다음, 왼쪽 끝을 누르면 이전 */
+deck.addEventListener("click", e => show(e.clientX < innerWidth * 0.2 ? at - 1 : at + 1));
+
+/* 손가락으로 밀기 */
+let x0 = null;
+deck.addEventListener("touchstart", e => { x0 = e.changedTouches[0].clientX; }, { passive: true });
+deck.addEventListener("touchend", e => {
+  if (x0 === null) return;
+  const dx = e.changedTouches[0].clientX - x0;
+  if (Math.abs(dx) > 45) show(at + (dx < 0 ? 1 : -1));
+  x0 = null;
+}, { passive: true });
+
+/* 주소에 #5 처럼 적어 두면 그 장부터 시작합니다 */
+show((parseInt(location.hash.slice(1), 10) || 1) - 1);
+
+/* 잠깐 움직이면 아래 표시를 보여 줍니다 */
+let hudTimer;
+addEventListener("mousemove", () => {
+  document.body.classList.add("show-hud");
+  clearTimeout(hudTimer);
+  hudTimer = setTimeout(() => document.body.classList.remove("show-hud"), 2200);
+});
+</script>
+
+</body>
+</html>

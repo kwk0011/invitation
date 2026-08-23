@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>루나 첫 생일 · 진행 대본</title>
+<meta name="robots" content="noindex, nofollow" />
+<style>
+:root {
+  --paper:    #FCF8F1;
+  --ink:      #332E2A;
+  --ink-soft: #6B6155;
+  --ink-faint:#8A7F70;
+  --line:     #E2D8C8;
+  --seal:     #B93A50;
+  --font-display: "Nanum Myeongjo", AppleMyungjo, "Noto Serif KR", Batang, 바탕, Georgia, serif;
+  --font-body: Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 24px 16px 60px;
+  background: #E8E2D8; color: var(--ink);
+  font-family: var(--font-body); font-size: 11pt; line-height: 1.75;
+}
+p { margin: 0 0 .55em; }
+
+.bar {
+  max-width: 190mm; margin: 0 auto 20px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+  padding: 14px 18px; background: var(--paper); border-radius: 4px;
+  font-size: .875rem; color: var(--ink-soft);
+}
+.bar b { color: var(--ink); }
+.bar a, .bar button {
+  appearance: none; cursor: pointer; text-decoration: none;
+  padding: 9px 18px; border-radius: 999px;
+  border: 1px solid var(--line); background: transparent; color: var(--ink);
+  font-family: var(--font-body); font-size: .875rem;
+}
+.bar .go { margin-left: auto; border-color: var(--seal); background: var(--seal); color: #FFF6F2; }
+
+.page {
+  max-width: 190mm; margin: 0 auto;
+  background: var(--paper); padding: 16mm 15mm;
+}
+h1 {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: 22pt; letter-spacing: .04em; margin: 0 0 2mm;
+}
+.sub { color: var(--ink-faint); font-size: 10pt; letter-spacing: .1em; margin-bottom: 10mm; }
+
+h2 {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: 14pt; letter-spacing: .1em; color: var(--seal);
+  margin: 12mm 0 4mm; padding-bottom: 2mm;
+  border-bottom: 1px solid var(--line);
+}
+
+table { width: 100%; border-collapse: collapse; font-size: 10.5pt; }
+th, td { padding: 2.6mm 2mm; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+th { color: var(--ink-faint); font-weight: 500; font-size: 9.5pt; letter-spacing: .1em; }
+td.t { font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--seal); font-weight: 600; width: 20mm; }
+td.m { white-space: nowrap; color: var(--ink-faint); width: 14mm; text-align: right; }
+
+.step { margin: 0 0 9mm; }
+.step__h {
+  font-family: var(--font-display); font-size: 13pt;
+  display: flex; align-items: baseline; gap: 3mm; margin-bottom: 2.5mm;
+}
+.step__h em { font-style: normal; color: var(--seal); font-variant-numeric: tabular-nums; }
+.step__h small { color: var(--ink-faint); font-size: 9.5pt; letter-spacing: .08em; margin-left: auto; }
+
+.say {
+  font-family: var(--font-display); font-size: 11.5pt; line-height: 2.05;
+  padding: 4mm 5mm; margin: 0 0 3mm;
+  background: #F4EDE1; border-left: 2px solid var(--seal); border-radius: 2px;
+  white-space: pre-line;
+}
+.do {
+  font-size: 10pt; color: var(--ink-soft);
+  padding-left: 5mm; border-left: 2px dashed var(--line);
+  margin: 0 0 3mm; white-space: pre-line;
+}
+.do b { color: var(--ink); }
+.blank { color: var(--seal); }
+
+ul.check { list-style: none; padding: 0; margin: 0; font-size: 10.5pt; }
+ul.check li { padding: 1.6mm 0 1.6mm 8mm; position: relative; border-bottom: 1px solid var(--line); }
+ul.check li::before {
+  content: ""; position: absolute; left: 0; top: 3.4mm;
+  width: 4mm; height: 4mm; border: 1px solid var(--ink-faint); border-radius: 1px;
+}
+
+@page { size: A4 portrait; margin: 0; }
+@media print {
+  body { padding: 0; background: #fff; }
+  .bar { display: none; }
+  .page { max-width: none; margin: 0; }
+  h2 { break-after: avoid; }
+  .step { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <p><b>진행 대본</b> · 인쇄해서 손에 들고 보세요. 빈칸 <span class="blank">○○</span> 은 현장에서 채우는 자리입니다.</p>
+  <a href="?v=dt" id="lnkDt">동탄용</a>
+  <a href="?v=gn" id="lnkGn">강릉용</a>
+  <button class="go" type="button" onclick="window.print()">인쇄하기</button>
+</div>
+
+<div class="page" id="page"></div>
+
+<script>
+const V = {
+  dt: {
+    label: "동탄 · 루나네 집",
+    date: "2026년 9월 12일 토요일 오전 11시",
+    rows: [
+      ["11:00", "손님 맞이", "20", "슬라이드 1~2장 띄워 두기"],
+      ["11:20", "여는 인사", "3", "아빠"],
+      ["11:23", "지나온 열두 달", "5", "영상 재생"],
+      ["11:30", "돌잡이", "10", "동물 여섯 · 예측 맞히기"],
+      ["11:40", "케이크 · 축하 노래", "7", ""],
+      ["11:50", "숫자 뽑기 · 쿠폰", "10", "휴대폰 돌리기"],
+      ["12:00", "사진 촬영", "20", "다 같이 → 친가 → 외가 → 친구"],
+      ["12:20", "마무리 · 이동 안내", "5", ""],
+      ["13:00", "식사 · 긴자 신영통점", "", "경기 수원시 영통구 봉영로 1377"]
+    ],
+    closing: `오늘 정말 고맙습니다.
+식사는 자리를 옮겨서 합니다.
+오후 한 시, 신영통 긴자입니다.
+초대장에 지도 버튼이 있으니 눌러서 오시면 되고,
+주소는 봉영로 천삼백칠십칠입니다.
+천천히 오세요. 저희가 먼저 가 있겠습니다.`,
+    closingDo: `이동해야 하니 <b>주소를 두 번 말해 주세요.</b>
+차 없이 오신 분이 있으면 이때 태워 갈 분을 정해 주는 게 좋습니다.`
+  },
+  gn: {
+    label: "강릉 · 씨마크 호텔 더 레스토랑",
+    date: "2026년 9월 24일 목요일 오후 5시 30분",
+    rows: [
+      ["17:30", "손님 맞이", "15", "슬라이드 1~2장 띄워 두기"],
+      ["17:45", "여는 인사", "3", "아빠"],
+      ["17:48", "지나온 열두 달", "5", "영상 재생"],
+      ["17:55", "돌잡이", "10", "동물 여섯 · 예측 맞히기"],
+      ["18:05", "케이크 · 축하 노래", "7", ""],
+      ["18:12", "숫자 뽑기 · 쿠폰", "10", "휴대폰 돌리기"],
+      ["18:22", "사진 촬영", "15", "다 같이 → 친가 → 외가 → 친구"],
+      ["18:37", "마무리 → 식사 시작", "", ""]
+    ],
+    closing: `오늘 정말 고맙습니다.
+멀리까지 와 주셨는데 짧게 끝내서 죄송할 정도입니다.
+이제 식사 준비가 다 됐다고 합니다.
+편히 앉으셔서 맛있게 드시고 가세요.
+저희도 자리마다 인사드리러 다니겠습니다.`,
+    closingDo: `<b>자리마다 인사 도는 것을 잊지 마세요.</b>
+어르신 테이블부터 도는 게 좋습니다.`
+  }
+};
+
+const key = new URLSearchParams(location.search).get("v") === "gn" ? "gn" : "dt";
+const v = V[key];
+document.getElementById(key === "gn" ? "lnkGn" : "lnkDt").style.cssText =
+  "border-color:var(--ink);font-weight:600";
+
+const STEPS = [
+  {
+    n: "1", h: "여는 인사", m: "3분",
+    say: `오늘 바쁘신데 이렇게 와 주셔서 정말 고맙습니다.
+루나 아빠 김경원입니다.
+
+작년 이맘때 이 작은 아이를 안고 집에 들어오던 게
+엊그제 같은데, 오늘 벌써 첫 생일입니다.
+
+길게 하지 않겠습니다.
+삼십 분쯤 짧게 보시고,
+끝나면 맛있게 드시면 좋겠습니다.`,
+    do: `숨 한 번 쉬고 천천히 시작하세요.
+<b>마이크가 있으면 한 번 쳐 보고</b> 소리 나는지 확인하고 시작합니다.`
+  },
+  {
+    n: "2", h: "지나온 열두 달", m: "5분",
+    say: `먼저 루나가 지난 일 년을 어떻게 보냈는지
+영상으로 준비했습니다. 함께 봐 주세요.`,
+    do: `<b>[ 영상 재생 ]</b>
+영상 끝나고 한마디 —
+"목도 못 가누던 아이가 이제 손 잡고 걷습니다."`
+  },
+  {
+    n: "3", h: "돌잡이", m: "10분",
+    say: `이제 돌잡이를 하겠습니다.
+저희는 조금 다르게 준비했습니다.
+
+보통 실이나 돈, 청진기를 놓고
+뭐가 될지를 점치잖아요.
+저희는 무엇이 될지보다
+어떤 마음을 품고 자랄지가 더 궁금했습니다.
+
+그래서 동물 여섯 마리를 올렸습니다.
+호랑이는 용기, 코끼리는 지혜, 강아지는 사랑.
+나비는 희망, 말은 탐험, 거북이는 꾸준함입니다.
+
+초대장에서 미리 골라 주신 분들 계시죠?
+맞히신 분께는 작은 선물을 드리겠습니다.
+
+자, 루나야. 무엇을 잡을까?`,
+    do: `동물 소개할 때 <b>하나씩 들어 보여 주세요.</b> 슬라이드 6장과 같은 순서입니다.
+
+<b>[ 돌잡이 ]</b> 아이가 망설이면 재촉하지 말고 기다리세요.
+정 안 잡으면 "오늘은 고르기 어려운가 봅니다" 하고 넘어가면 됩니다.
+
+결과 발표 —
+"루나가 <span class='blank'>○○○</span>를 잡았습니다!
+<span class='blank'>○○</span>한 사람이 되겠네요."
+
+맞히신 분 손 들어 달라고 하고 쿠폰 전달.`
+  },
+  {
+    n: "4", h: "케이크 · 축하 노래", m: "7분",
+    say: `케이크에 초를 켜겠습니다.
+다 같이 축하 노래 불러 주시겠어요?`,
+    do: `<b>[ 노래 ]</b> 슬라이드 8장에 가사가 있습니다.
+노래 끝나고 — "루나야, 후 —"
+촛불은 아빠가 같이 불어 주세요. 아이 혼자 못 붑니다.
+<b>이때가 사진이 제일 많이 나오는 순간</b>이니 촬영하는 분께 미리 말해 두세요.`
+  },
+  {
+    n: "5", h: "숫자 뽑기 · 쿠폰", m: "10분",
+    say: `작은 이벤트를 하나 준비했습니다.
+
+제 휴대폰을 돌리겠습니다.
+화면에서 뽑기를 누르시면
+일부터 백까지 숫자가 하나 나옵니다.
+
+가장 작은 수를 뽑으신 분,
+가장 큰 수를 뽑으신 분께 선물을 드립니다.
+
+번호 나오면 기억해 두시거나
+화면 한 번 찍어 두세요.`,
+    do: `미리 <b>초대장 주소 뒤에 ?draw 를 붙여 열어 두세요.</b>
+(맨 아래 "첫돌" 글자를 세 번 눌러도 열립니다)
+
+한 명씩 돌리면 오래 걸립니다. <b>휴대폰 두 대로 양쪽에서</b> 돌리면 절반으로 줄어듭니다.
+
+발표 —
+"가장 작은 수는 <span class='blank'>○</span>번,
+가장 큰 수는 <span class='blank'>○</span>번입니다. 축하드립니다!"
+
+같은 수가 여러 명 나오면 다 드리세요. 쿠폰은 넉넉히 준비.`
+  },
+  {
+    n: "6", h: "사진 촬영", m: "20분 / 강릉 15분",
+    say: `이제 다 같이 사진 찍겠습니다.
+먼저 한 장 크게 찍고,
+그다음에 나눠서 찍겠습니다.
+
+뒤쪽에 계신 분들 조금만 앞으로 와 주세요.`,
+    do: `<b>순서를 정해 두고 이름을 불러야 안 밀립니다.</b>
+다 같이 → 친가 → 외가 → 친구 → 아기 가족만
+
+한 팀 끝날 때마다 "다음은 외가 쪽 나와 주세요" 하고 <b>먼저 부르세요.</b>
+여기서 늦어지면 식사가 통째로 밀립니다.`
+  }
+];
+
+const rows = v.rows.map(([t, s, m, note]) =>
+  `<tr><td class="t">${t}</td><td>${s}${note ? `<br /><span style="color:var(--ink-faint);font-size:9.5pt">${note}</span>` : ""}</td><td class="m">${m ? m + "분" : ""}</td></tr>`).join("");
+
+const steps = STEPS.map(s => `
+  <div class="step">
+    <p class="step__h"><em>${s.n}</em> ${s.h} <small>${s.m}</small></p>
+    <p class="say">${s.say}</p>
+    <p class="do">${s.do}</p>
+  </div>`).join("");
+
+document.getElementById("page").innerHTML = `
+  <h1>루나 첫 생일 · 진행 대본</h1>
+  <p class="sub">${v.label} · ${v.date} · 진행 아빠</p>
+
+  <h2>진행 순서</h2>
+  <table>
+    <tr><th>시각</th><th>순서</th><th>시간</th></tr>
+    ${rows}
+  </table>
+
+  <h2>대본</h2>
+  ${steps}
+
+  <div class="step">
+    <p class="step__h"><em>7</em> 마무리 <small>5분</small></p>
+    <p class="say">${v.closing}</p>
+    <p class="do">${v.closingDo}</p>
+  </div>
+
+  <h2>챙길 것</h2>
+  <ul class="check">
+    <li>돌잡이 동물 여섯 — 호랑이 · 코끼리 · 강아지 · 나비 · 말 · 거북이</li>
+    <li>동물을 올려 둘 상이나 쟁반</li>
+    <li>인쇄한 쿠폰 (넉넉히 8장 이상)</li>
+    <li>현금 봉투 — 어르신이 당첨되면 바로 드릴 것</li>
+    <li>케이크 · 초 · 라이터</li>
+    <li>영상 파일 (인터넷 없이도 되게 기기에 미리 받아 두기)</li>
+    <li>슬라이드를 띄울 기기 · 충전기 · 연결선</li>
+    <li>휴대폰 두 대 (숫자 뽑기용, 배터리 확인)</li>
+    <li>이 대본 인쇄본</li>
+  </ul>
+
+  <h2>미리 해 둘 것</h2>
+  <ul class="check">
+    <li>슬라이드를 화면에 띄워 크기와 글자가 잘 보이는지 확인</li>
+    <li>영상 소리 크기 확인 — 사람이 차면 훨씬 안 들립니다</li>
+    <li>숫자 뽑기 화면을 미리 열어 두기 (주소 뒤 <b>?draw</b>)</li>
+    <li>사진 찍어 줄 사람 정하고 순서 알려 주기</li>
+    <li>아이 낮잠·수유 시간을 행사 시작 전으로 당겨 두기</li>
+  </ul>`;
+</script>
+
+</body>
+</html>
