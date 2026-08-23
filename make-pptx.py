@@ -11,6 +11,7 @@ slides.html 과 같은 내용, 같은 색을 씁니다.
     루나-첫생일-강릉.pptx
 """
 import sys
+from pathlib import Path
 
 from pptx import Presentation
 from pptx.dml.color import RGBColor
@@ -35,6 +36,10 @@ DISPLAY = "바탕"
 BODY = "맑은 고딕"
 
 W, H = Inches(13.333), Inches(7.5)   # 16:9
+
+# 지나온 열두 달 영상. 파일이 없으면 안내 문구만 들어갑니다.
+FILM = Path("video/diary_music.mp4")
+POSTER = Path("images/m-00.jpg")      # 재생 전에 보일 그림
 
 BABY_FACTS = [
     ("태어난 날", "2025년 9월 22일"),
@@ -170,12 +175,18 @@ def build(venue_name, v, out):
 
     # 4 영상
     s = blank(prs)
-    text(s, "사 진", Inches(1.1), Inches(0.5), 15, INK_FAINT, DISPLAY, spacing=4)
-    text(s, "지나온 열두 달", Inches(1.75), Inches(1.2), 52, INK, DISPLAY)
-    rule(s, Inches(3.3))
-    text(s, "작은 손으로 세상을 처음 만나던 날부터\n오늘까지",
-         Inches(3.95), Inches(1.5), 25, INK_SOFT, DISPLAY, line=1.8)
-    text(s, "— 여기서 영상을 틀어 주세요 —", Inches(5.9), Inches(0.5), 14, INK_FAINT, BODY)
+    text(s, "사 진", Inches(0.42), Inches(0.45), 15, INK_FAINT, DISPLAY, spacing=4)
+    text(s, "지나온 열두 달", Inches(0.95), Inches(0.85), 36, INK, DISPLAY)
+    # 16:9 영상을 화면 가운데에 놓습니다
+    vid_w = Inches(8.4)
+    vid_h = Inches(8.4 * 9 / 16)
+    if FILM.exists():
+        s.shapes.add_movie(str(FILM), W // 2 - vid_w // 2, Inches(2.05), vid_w, vid_h,
+                           poster_frame_image=str(POSTER) if POSTER.exists() else None,
+                           mime_type="video/mp4")
+    else:
+        text(s, "— 여기서 영상을 틀어 주세요 —", Inches(3.6), Inches(0.5), 16, INK_FAINT, BODY)
+    text(s, "재생 버튼을 누르면 시작합니다", Inches(6.85), Inches(0.45), 13, INK_FAINT, BODY)
 
     # 5 돌잡이 열기
     s = blank(prs)
