@@ -103,6 +103,14 @@ p, h1, h2 { margin: 0; }
 }
 .six span { font-size: calc(var(--u) * 1.1); letter-spacing: .18em; color: var(--seal); }
 
+/* 돌잡이 결과 · 고민하는 아이 */
+.think {
+  height: min(46vh, calc(var(--u) * 34));
+  width: auto;
+  margin-top: calc(var(--u) * .4);
+  filter: drop-shadow(0 calc(var(--u) * .6) calc(var(--u) * 1.2) rgba(51, 46, 42, .16));
+}
+
 /* 노래 가사 */
 .lyrics {
   font-family: var(--font-display);
@@ -240,6 +248,7 @@ const SLIDES = [
   /* 7 결과 */ `
     <p class="eyebrow">돌잡이</p>
     <h2 class="title">루나가 잡은 것은</h2>
+    <img class="think" src="images/dolzabi-think.webp" alt="고민하는 루나" />
     <div class="band"><i></i><i></i><i></i><i></i><i></i></div>`,
 
   /* 8 맞히신 분 */ `

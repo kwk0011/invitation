@@ -40,6 +40,7 @@ W, H = Inches(13.333), Inches(7.5)   # 16:9
 # 지나온 열두 달 영상. 파일이 없으면 안내 문구만 들어갑니다.
 FILM = Path("video/diary_39s.mp4")
 POSTER = Path("images/m-00.jpg")      # 재생 전에 보일 그림
+THINK = Path("images/dolzabi-think.png")   # 돌잡이 결과 슬라이드에 쓰는 누끼 사진
 
 BABY_FACTS = [
     ("태어난 날", "2025년 9월 22일"),
@@ -233,9 +234,16 @@ def build(venue_name, v, out):
 
     # 7 결과
     s = blank(prs)
-    text(s, "돌 잡 이", Inches(1.6), Inches(0.5), 15, INK_FAINT, DISPLAY, spacing=4)
-    text(s, "루나가 잡은 것은", Inches(2.6), Inches(1.5), 56, INK, DISPLAY)
-    band(s, Inches(5.2))
+    text(s, "돌 잡 이", Inches(0.5), Inches(0.5), 15, INK_FAINT, DISPLAY, spacing=4)
+    text(s, "루나가 잡은 것은", Inches(1.05), Inches(1.15), 48, INK, DISPLAY)
+    if THINK.exists():
+        # 배경을 지운 사진이라 아이보리 위에 그대로 올려 놓습니다
+        th_h = Inches(4.15)
+        th_w = Emu(int(th_h * 820 / 970))
+        s.shapes.add_picture(str(THINK), W // 2 - th_w // 2, Inches(2.35), th_w, th_h)
+        band(s, Inches(6.85))
+    else:
+        band(s, Inches(5.2))
 
     # 8 맞히신 분
     s = blank(prs)
