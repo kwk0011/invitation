@@ -108,19 +108,22 @@ p, h1, h2 { margin: 0; }
   height: min(46vh, calc(var(--u) * 34));
   width: auto;
   margin-top: calc(var(--u) * .4);
+  /* 20도쯤 돌리면 아래쪽이 그만큼 밖으로 나와서, 색 띠가 가리지 않도록 자리를 비워 둡니다 */
+  margin-bottom: calc(var(--u) * 3);
   filter: drop-shadow(0 calc(var(--u) * .6) calc(var(--u) * 1.2) rgba(51, 46, 42, .16));
   /* 엉덩이를 축으로 삼아야 머리가 갸웃거리는 것처럼 보입니다 */
   transform-origin: 50% 88%;
 }
 /* 그 장이 나올 때부터 좌우로 갸웃거립니다.
    step-end 를 써서 두 자세 사이를 미끄러지지 않고 딱딱 건너뜁니다 (옛날 gif 느낌).
-   원본 사진이 이미 왼쪽으로 기울어 있어, 똑바로 선 자세인 -8도를 가운데 두고
-   그 좌우로 3도씩 움직입니다. */
+   원본 사진이 왼쪽으로 20도쯤 기울어 있어서, 오른쪽으로 20도 돌린 자리를
+   똑바로 선 자세로 보고 그 좌우로 3도씩 움직입니다. */
 .slide.is-on .think { animation: think-rock 2s step-end infinite; }
 @keyframes think-rock {
-  0%   { transform: rotate(-11deg); }
-  50%  { transform: rotate( -5deg); }
-  100% { transform: rotate(-11deg); }
+  /* 돌리면 무게가 오른쪽으로 쏠려서, 가운데로 보이도록 살짝 왼쪽으로 당겨 둡니다 */
+  0%   { transform: translateX(calc(var(--u) * -.9)) rotate(17deg); }
+  50%  { transform: translateX(calc(var(--u) * -1.2)) rotate(23deg); }
+  100% { transform: translateX(calc(var(--u) * -.9)) rotate(17deg); }
 }
 /* 화면 움직임을 꺼 둔 분에게는 가만히 있게 합니다 */
 @media (prefers-reduced-motion: reduce) {
