@@ -1048,10 +1048,15 @@ $("#notes").innerHTML = CONFIG.event.notes.map(n => `<li>${n}</li>`).join("");
 const mapQ = (o, which) => encodeURIComponent(
   (o["mapQuery" + which] || o.mapQuery || o.address || o.placeName || "").trim());
 
+/* 검색은 건물만 잡히고 가게가 바로 선택되지 않을 때가 있습니다.
+   mapUrlNaver / mapUrlKakao 에 장소 주소를 직접 적어 두면 검색을 건너뛰고 그리로 바로 갑니다. */
+const MAP_BASE = { Naver: "https://map.naver.com/p/search/", Kakao: "https://map.kakao.com/link/search/" };
+const mapLink = (o, which) => o["mapUrl" + which] || MAP_BASE[which] + mapQ(o, which);
+
 (() => {
   const addr = (CONFIG.event.address || "").trim();
-  $("#naver").href = `https://map.naver.com/p/search/${mapQ(CONFIG.event, "Naver")}`;
-  $("#kakao").href = `https://map.kakao.com/link/search/${mapQ(CONFIG.event, "Kakao")}`;
+  $("#naver").href = mapLink(CONFIG.event, "Naver");
+  $("#kakao").href = mapLink(CONFIG.event, "Kakao");
   // 주소가 비어 있으면 주소 줄과 복사 버튼을 숨깁니다
   if (!addr) {
     $$('[data-bind="placeAddr"]').forEach(el => el.hidden = true);
@@ -1065,7 +1070,7 @@ const mapQ = (o, which) => encodeURIComponent(
   if (!box || !m || !m.placeName) return;
 
   const NAME_CSS = "font-family:var(--font-display);font-size:var(--step-1);color:var(--ink);display:block;margin:0";
-  const qN = mapQ(m, "Naver"), qK = mapQ(m, "Kakao");
+  const linkN = mapLink(m, "Naver"), linkK = mapLink(m, "Kakao");
 
   box.innerHTML = `
     <div class="venue2">
@@ -1076,8 +1081,8 @@ const mapQ = (o, which) => encodeURIComponent(
         ${m.address ? `<span>${m.address}</span>` : ""}
       </p>
       <div class="btns">
-        <a class="btn" href="https://map.naver.com/p/search/${qN}" target="_blank" rel="noopener">네이버 지도</a>
-        <a class="btn" href="https://map.kakao.com/link/search/${qK}" target="_blank" rel="noopener">카카오맵</a>
+        <a class="btn" href="${linkN}" target="_blank" rel="noopener">네이버 지도</a>
+        <a class="btn" href="${linkK}" target="_blank" rel="noopener">카카오맵</a>
         ${m.address ? `<button class="btn" type="button" data-copy-meal>주소 복사</button>` : ""}
       </div>
     </div>`;

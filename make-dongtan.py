@@ -34,6 +34,10 @@ EVENT_OLD = '''    placeName: "씨마크 호텔 1층 더 레스토랑",
     mapQueryNaver: "강원 강릉시 해안로406번길 2 씨마크호텔",
     mapQueryKakao: "강원특별자치도 강릉시 해안로406번길 2 로비층",
 
+    // 네이버는 검색만으로는 호텔이 바로 선택되지 않아, 장소를 직접 엽니다.
+    // 36534206 은 네이버 지도에 등록된 씨마크호텔의 장소 번호입니다.
+    mapUrlNaver: "https://map.naver.com/p/entry/place/36534206",
+
     // 식사를 다른 곳에서 한다면 채우세요. null이면 아무것도 표시되지 않습니다.
     // 예) meal: { whenText: "같은 날 오후 1시", placeName: "○○식당 △△점",
     //             address: "도로명 주소", mapQuery: "지도에서 검색할 말" },
