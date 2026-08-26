@@ -239,7 +239,7 @@ def build(venue_name, v, out):
     if THINK.exists():
         # 배경을 지운 사진이라 아이보리 위에 그대로 올려 놓습니다
         th_h = Inches(4.15)
-        th_w = Emu(int(th_h * 820 / 970))
+        th_w = Emu(int(th_h * 820 / 893))
         s.shapes.add_picture(str(THINK), W // 2 - th_w // 2, Inches(2.35), th_w, th_h)
         band(s, Inches(6.85))
     else:
