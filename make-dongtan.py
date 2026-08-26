@@ -58,7 +58,9 @@ EVENT_NEW = '''    placeName: "루나네 집",
       whenText: "같은 날 오후 1시",
       placeName: "긴자 신영통점",
       address: "경기 수원시 영통구 봉영로 1377",
-      mapQuery: "수원시 영통구 봉영로 1377"
+      mapQuery: "수원시 영통구 봉영로 1377",
+      // 35228977 은 네이버 지도에 등록된 긴자 신영통점의 장소 번호입니다
+      mapUrlNaver: "https://map.naver.com/p/entry/place/35228977"
     },
 
     notes: [
