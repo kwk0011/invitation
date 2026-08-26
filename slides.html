@@ -109,6 +109,19 @@ p, h1, h2 { margin: 0; }
   width: auto;
   margin-top: calc(var(--u) * .4);
   filter: drop-shadow(0 calc(var(--u) * .6) calc(var(--u) * 1.2) rgba(51, 46, 42, .16));
+  /* 엉덩이를 축으로 삼아야 머리가 갸웃거리는 것처럼 보입니다 */
+  transform-origin: 50% 88%;
+}
+/* 그 장이 나올 때부터 좌우로 갸웃거립니다 */
+.slide.is-on .think { animation: think-rock 3.4s ease-in-out infinite; }
+@keyframes think-rock {
+  0%   { transform: rotate(-2.2deg); }
+  50%  { transform: rotate( 2.2deg); }
+  100% { transform: rotate(-2.2deg); }
+}
+/* 화면 움직임을 꺼 둔 분에게는 가만히 있게 합니다 */
+@media (prefers-reduced-motion: reduce) {
+  .slide.is-on .think { animation: none; }
 }
 
 /* 노래 가사 */
