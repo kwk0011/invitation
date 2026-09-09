@@ -194,7 +194,7 @@ def build(venue_name, v, out):
     text(s, "돌 잡 이", Inches(0.9), Inches(0.5), 15, INK_FAINT, DISPLAY, spacing=4)
     text(s, "어떤 사람으로\n자랄까요?", Inches(1.5), Inches(2.3), 52, INK, DISPLAY, line=1.3)
     rule(s, Inches(4.25))
-    text(s, "무엇이 될지보다\n어떤 마음으로 자랄지가 궁금했습니다",
+    text(s, "무엇이 될지보다\n어떤 성품을 가지고 자랄지가 궁금했습니다",
          Inches(4.9), Inches(1.5), 24, INK_SOFT, DISPLAY, line=1.8)
 
     # 6 여섯 동물
