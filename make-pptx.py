@@ -257,7 +257,7 @@ def build(venue_name, v, out):
     # 9 노래
     s = blank(prs)
     text(s, "축 하  노 래", Inches(0.9), Inches(0.5), 15, INK_FAINT, DISPLAY, spacing=4)
-    text(s, "생일 축하합니다\n생일 축하합니다\n사랑하는 우리 루나\n생일 축하합니다",
+    text(s, "사랑해요 루나를\n축복해요 루나를\n하늘의 영원한 사랑과 축복 속에\n루나가 있죠",
          Inches(1.8), Inches(4.6), 40, INK, DISPLAY, line=1.75)
 
     # 10 숫자 뽑기
