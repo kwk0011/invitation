@@ -13,6 +13,7 @@ slides.html 과 같은 내용, 같은 색을 씁니다.
 import sys
 from pathlib import Path
 
+from PIL import Image
 from pptx import Presentation
 from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
@@ -41,6 +42,7 @@ W, H = Inches(13.333), Inches(7.5)   # 16:9
 FILM = Path("video/diary_music.mp4")
 POSTER = Path("images/m-00.jpg")      # 재생 전에 보일 그림
 THINK = Path("images/dolzabi-think.png")   # 돌잡이 결과 슬라이드에 쓰는 누끼 사진
+SCORE = Path("images/노래2-루나.png")       # 축복 노래 악보 (흰 바탕을 투명으로 뺀 것)
 
 BABY_FACTS = [
     ("태어난 날", "2025년 9월 22일"),
@@ -57,12 +59,22 @@ VENUES = {
         place="루나네 집",
         meal_title="이제 식사하러 갑니다",
         meal_lines=["오후 1시 · 긴자 신영통점", "경기 수원시 영통구 봉영로 1377"],
+        # 동탄은 두 곡을 이어 부릅니다
+        songs=[
+            dict(eyebrow="축 하  노 래",
+                 lyrics="사랑해요 루나를\n축복해요 루나를\n하늘의 영원한 사랑과 축복 속에\n루나가 있죠"),
+            dict(eyebrow="축 복  노 래", score=SCORE),
+        ],
     ),
     "강릉": dict(
         when="2026년 9월 24일 목요일",
         place="씨마크 호텔 더 레스토랑",
         meal_title="이제 식사를 시작합니다",
         meal_lines=["편히 앉으셔서 맛있게 드세요"],
+        songs=[
+            dict(eyebrow="축 하  노 래",
+                 lyrics="생일 축하합니다\n생일 축하합니다\n사랑하는 우리 루나\n생일 축하합니다"),
+        ],
     ),
 }
 
@@ -254,11 +266,21 @@ def build(venue_name, v, out):
          Inches(4.6), Inches(1.5), 24, INK_SOFT, DISPLAY, line=1.8)
     text(s, "화면을 보여 주세요", Inches(6.3), Inches(0.5), 15, INK_FAINT, BODY)
 
-    # 9 노래
-    s = blank(prs)
-    text(s, "축 하  노 래", Inches(0.9), Inches(0.5), 15, INK_FAINT, DISPLAY, spacing=4)
-    text(s, "사랑해요 루나를\n축복해요 루나를\n하늘의 영원한 사랑과 축복 속에\n루나가 있죠",
-         Inches(1.8), Inches(4.6), 40, INK, DISPLAY, line=1.75)
+    # 9 노래 — 동탄은 두 장, 강릉은 한 장
+    for song in v["songs"]:
+        s = blank(prs)
+        text(s, song["eyebrow"], Inches(0.9), Inches(0.5), 15, INK_FAINT, DISPLAY, spacing=4)
+        if "lyrics" in song:
+            text(s, song["lyrics"], Inches(1.8), Inches(4.6), 40, INK, DISPLAY, line=1.75)
+        elif song["score"].exists():
+            # 악보는 높이에 맞춰 최대한 크게, 가운데로
+            with Image.open(song["score"]) as img:
+                ratio = img.width / img.height
+            sc_h = Inches(5.55)
+            sc_w = Emu(int(sc_h * ratio))
+            s.shapes.add_picture(str(song["score"]), W // 2 - sc_w // 2, Inches(1.4), sc_w, sc_h)
+        else:
+            text(s, "악보 파일을 찾지 못했습니다", Inches(3.2), Inches(1.0), 20, INK_SOFT, BODY)
 
     # 10 숫자 뽑기
     s = blank(prs)

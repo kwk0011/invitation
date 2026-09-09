@@ -131,6 +131,14 @@ p, h1, h2 { margin: 0; }
   .slide.is-on .think { animation: none; }
 }
 
+/* 악보 — 슬라이드 안에 통째로 들어가도록 */
+.score {
+  max-width: 92%;
+  max-height: 76vh;
+  width: auto; height: auto;
+  object-fit: contain;
+}
+
 /* 노래 가사 */
 .lyrics {
   font-family: var(--font-display);
@@ -197,17 +205,28 @@ const BABY = {
 };
 
 const VENUE = {
-  dt: {   // 동탄
+  dt: {   // 동탄 — 노래 두 곡
     when: "2026년 9월 12일 토요일",
     place: "루나네 집",
     mealTitle: "이제 식사하러 갑니다",
-    mealLines: ["오후 1시 · 긴자 신영통점", "경기 수원시 영통구 봉영로 1377"]
+    mealLines: ["오후 1시 · 긴자 신영통점", "경기 수원시 영통구 봉영로 1377"],
+    songs: [
+      `<p class="eyebrow">축하 노래</p>
+       <p class="lyrics">사랑해요 루나를<br />축복해요 루나를<br />하늘의 영원한 사랑과 축복 속에<br />루나가 있죠</p>`,
+      `<p class="eyebrow">축복 노래</p>
+       <img class="score" src="images/노래2-루나.png"
+            alt="너는 시냇가에 심은 나무라 악보" />`
+    ]
   },
-  gn: {   // 강릉
+  gn: {   // 강릉 — 생일 축하 노래
     when: "2026년 9월 24일 목요일",
     place: "씨마크 호텔 더 레스토랑",
     mealTitle: "이제 식사를 시작합니다",
-    mealLines: ["편히 앉으셔서 맛있게 드세요"]
+    mealLines: ["편히 앉으셔서 맛있게 드세요"],
+    songs: [
+      `<p class="eyebrow">축하 노래</p>
+       <p class="lyrics">생일 축하합니다<br />생일 축하합니다<br />사랑하는 우리 루나<br />생일 축하합니다</p>`
+    ]
   }
 };
 
@@ -278,9 +297,8 @@ const SLIDES = [
     <p class="lead">초대장을 다시 열어 보시면<br />고르셨던 동물이 그대로 남아 있습니다</p>
     <p class="small">화면을 보여 주세요</p>`,
 
-  /* 9 노래 */ `
-    <p class="eyebrow">축하 노래</p>
-    <p class="lyrics">사랑해요 루나를<br />축복해요 루나를<br />하늘의 영원한 사랑과 축복 속에<br />루나가 있죠</p>`,
+  /* 9 노래 — 동탄은 두 장, 강릉은 한 장 */
+  ...v.songs,
 
   /* 10 숫자 뽑기 */ `
     <p class="eyebrow">행운의 숫자</p>
