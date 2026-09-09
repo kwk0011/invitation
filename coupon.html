@@ -123,6 +123,8 @@ p { margin: 0; }
   .bar { display: none; }
   .sheet {
     width: 297mm; height: 210mm; margin: 0;
+    /* 종이색은 넣지 않습니다. 베이지 색지에 인쇄하므로 종이 자체가 배경입니다. */
+    background: none;
     box-shadow: none;
     break-inside: avoid;
   }
@@ -150,6 +152,7 @@ p { margin: 0; }
 <div class="bar">
   <p>
     <b>A4 한 장(가로)에 여덟 장</b>, 쿠폰 하나는 69 × 95mm 세로 카드입니다. 오른쪽 버튼으로 인쇄하시고, 점선을 따라 자르세요.<br />
+    <b>베이지 색지</b>에 인쇄하는 것을 전제로, 종이색은 넣지 않습니다(화면 미리보기에만 깔려 있습니다).
     인쇄 설정에서 <b>용지 방향 가로</b>와 <b>배율 100%</b>만 확인해 주세요. 낙관과 색동 띠는 '배경 그래픽' 설정과 상관없이 찍히므로, 휴대폰에서 인쇄하셔도 됩니다.
   </p>
   <button class="bar__btn" type="button" onclick="window.print()">인쇄하기</button>
