@@ -216,6 +216,10 @@ const VENUE = {
       `<p class="eyebrow">축복 노래</p>
        <img class="score" src="images/노래2-루나.png"
             alt="너는 시냇가에 심은 나무라 악보" />`
+    ],
+    // 누가 하는지는 적지 않습니다. 화면에는 이 말만 띄웁니다.
+    prayer: [
+      `<h2 class="title">축복의 기도</h2>`
     ]
   },
   gn: {   // 강릉 — 생일 축하 노래
@@ -226,7 +230,8 @@ const VENUE = {
     songs: [
       `<p class="eyebrow">축하 노래</p>
        <p class="lyrics">생일 축하합니다<br />생일 축하합니다<br />사랑하는 우리 루나<br />생일 축하합니다</p>`
-    ]
+    ],
+    prayer: []
   }
 };
 
@@ -299,6 +304,9 @@ const SLIDES = [
 
   /* 9 노래 — 동탄은 두 장, 강릉은 한 장 */
   ...v.songs,
+
+  /* 축복의 기도 — 동탄만 */
+  ...v.prayer,
 
   /* 10 숫자 뽑기 */ `
     <p class="eyebrow">행운의 숫자</p>
